@@ -42,7 +42,7 @@ Le projet suit l'architecture MVVM (Model - View - ViewModel) pour une meilleure
 1. Cloner le dépôt :
 
    ```bash
-   git clone <URL_DU_DEPOT>
+   git clone https://github.com/lorisknodt/iot2_clm.git
    ```
 2. Ouvrir le projet dans IntelliJ IDEA ou Android Studio.
 3. Compiler et exécuter le projet sur un émulateur ou un appareil physique.
