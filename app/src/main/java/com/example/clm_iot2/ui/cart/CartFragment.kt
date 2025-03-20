@@ -1,42 +1,46 @@
 package com.example.clm_iot2.ui.cart
 
+import CartAdapter
+import CartViewModel
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.clm_iot2.databinding.FragmentCartBinding
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.clm_iot2.R
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(R.layout.fragment_cart) {
 
-    private var _binding: FragmentCartBinding? = null
+    private lateinit var recyclerViewCart: RecyclerView
+    private lateinit var cartAdapter: CartAdapter
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    // Utilisation correcte de activityViewModels pour conserver les données
+    private val cartViewModel: CartViewModel by activityViewModels()
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        val galleryViewModel =
-                ViewModelProvider(this).get(CartViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentCartBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        recyclerViewCart = view.findViewById(R.id.recyclerViewCart)
 
-        val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
-    }
+        // Initialisation de l'adaptateur avec une liste vide
+        cartAdapter = CartAdapter(
+            mutableListOf(),
+            onQuantityChange = { produit, newQuantity ->
+                cartViewModel.updateProductQuantity(produit, newQuantity)
+            },
+            onRemoveProduct = { produit ->
+                cartViewModel.removeProduct(produit)
+            }
+        )
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        recyclerViewCart.adapter = cartAdapter
+        recyclerViewCart.layoutManager = LinearLayoutManager(context)
+
+        // Mise à jour de la liste de produits du panier
+        val produits = cartViewModel.getCartProducts()
+        println("Affichage du panier dans le fragment : $produits")
+
+        cartAdapter.updateData(produits)
     }
 }

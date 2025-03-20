@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="6dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+        <!-- Image du produit avec coins arrondis -->
+        <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iconeProduitCart"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/description_image_produit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+        <!-- Nom du produit -->
+        <TextView
+                android:id="@+id/nomProduitCart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="sans-serif-medium" />
+
+        <!-- Prix du produit -->
+        <TextView
+                android:id="@+id/prixProduitCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:textSize="18sp"
+                android:textColor="@color/design_default_color_primary"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
+                app:layout_constraintTop_toBottomOf="@id/nomProduitCart" />
+
+        <!-- Contrôleur de quantité -->
+        <LinearLayout
+                android:id="@+id/quantityControlLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/quantity_control_background"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
+                app:layout_constraintTop_toBottomOf="@id/prixProduitCart">
+
+            <!-- Bouton pour diminuer la quantité -->
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDecrease"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    app:cornerRadius="0dp"
+                    app:icon="@drawable/ic_cart_remove"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="18dp"
+                    style="@style/Widget.Material3.Button.TextButton.Icon" />
+
+            <!-- Affichage de la quantité -->
+            <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:text="1"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium" />
+
+            <!-- Bouton pour augmenter la quantité -->
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnIncrease"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    app:cornerRadius="0dp"
+                    app:icon="@drawable/ic_cart_add"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="18dp"
+                    style="@style/Widget.Material3.Button.TextButton.Icon" />
+        </LinearLayout>
+
+        <!-- Bouton pour supprimer le produit du panier -->
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supprimer"
+                android:textSize="12sp"
+                app:icon="@drawable/ic_cart_delete"
+                app:iconGravity="textStart"
+                app:iconPadding="4dp"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
