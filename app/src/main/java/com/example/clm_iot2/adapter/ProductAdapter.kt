@@ -1,3 +1,6 @@
+import android.os.Bundle
+import android.provider.Settings.Global.putInt
+import android.provider.Settings.Global.putString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +39,19 @@ class ProductAdapter(
         holder.prixProduit.text = "${produit.prix} €"
 
         holder.itemView.setOnClickListener {
-            holder.itemView.findNavController().navigate(R.id.action_productsFragment_to_singleProductFragment)
+            val bundle = Bundle().apply {
+                putString("name", produit.nom)
+                putString("description", produit.description)
+                putDouble("price", produit.prix)
+                putInt("imageResId", produit.iconeResId)  // Si c'est une ressource locale
+            }
+
+            holder.itemView.findNavController().navigate(
+                R.id.action_productsFragment_to_singleProductFragment,
+                bundle
+            )
         }
+
 
         holder.btnAdd.setOnClickListener {
             val produitAvecQuantite = produit.copy(quantity = 1) // S'assure que la quantité est définie correctement

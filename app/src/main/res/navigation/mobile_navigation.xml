@@ -20,14 +20,22 @@
     <fragment
             android:id="@+id/singleProductFragment"
             android:name="com.example.clm_iot2.ui.singleproduct.SingleProductFragment"
-            android:label="SingleProductFragment" />
+            android:label="Détail" />
 
 
     <fragment
             android:id="@+id/nav_cart"
             android:name="com.example.clm_iot2.ui.cart.CartFragment"
-            android:label="@string/menu_cart"
-            tools:layout="@layout/fragment_cart"/>
+            android:label="Panier">
+        <action
+                android:id="@+id/action_cartFragment_to_singleProductFragment"
+                app:destination="@id/singleProductFragment"/>
+
+        <action
+                android:id="@+id/action_cartFragment_to_orderConfirmationFragment"
+                app:destination="@id/orderConfirmationFragment" />
+
+    </fragment>
 
     <fragment
             android:id="@+id/nav_orders"
@@ -46,5 +54,10 @@
             android:name="com.example.clm_iot2.ui.orders.OrdersFragment"
             android:label="@string/menu_tracking"
             tools:layout="@layout/fragment_orders"/>
+    <fragment
+            android:id="@+id/orderConfirmationFragment"
+            android:name="com.example.clm_iot2.ui.orderConfirmation.OrderConfirmationFragment"
+            android:label="Confirmation de la commande" />
+
 
 </navigation>

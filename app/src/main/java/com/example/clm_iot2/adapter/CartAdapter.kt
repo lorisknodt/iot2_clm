@@ -1,7 +1,9 @@
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.Product  // Remplace par le bon import de ton modèle
@@ -46,9 +48,23 @@ class CartAdapter(
 
         // Gestion de la suppression complète du produit
         holder.btnRemove.setOnClickListener {
-            onRemoveProduct(product)
-            produits.removeAt(position)
+            onRemoveProduct(product) // La suppression est déjà gérée ici
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, produits.size)
+        }
+
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("name", product.nom)
+                putString("description", product.description)
+                putDouble("price", product.prix)
+                putInt("imageResId", product.iconeResId)  // Si c'est une ressource locale
+            }
+
+            holder.itemView.findNavController().navigate(
+                R.id.action_cartFragment_to_singleProductFragment,
+                bundle
+            )
         }
     }
 
