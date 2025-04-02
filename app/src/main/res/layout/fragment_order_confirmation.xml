@@ -12,6 +12,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+        <!-- Adresse de Livraison -->
         <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,22 +35,84 @@
                         android:layout_marginBottom="8dp"
                         android:textColor="@android:color/black"/>
 
+                <!-- Adresse -->
                 <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editTextAddress"
+                            android:id="@+id/editTextStreet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Entrez votre adresse"
-                            android:inputType="textPostalAddress"
-                            android:maxLines="3"/>
+                            android:hint="Adresse (Rue et numéro)"
+                            android:inputType="text"/>
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Appartement (optionnel) -->
+                <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextApartment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Appartement, étage, etc. (optionnel)"
+                            android:inputType="text"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Ville -->
+                <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Ville"
+                            android:inputType="text"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Pays -->
+                <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextCountry"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Pays"
+                            android:inputType="text"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Code Postal -->
+                <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextPostalCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Code Postal"
+                            android:inputType="number"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Informations de Paiement -->
         <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,30 +129,89 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Méthode de paiement"
+                        android:text="Informations de paiement"
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:layout_marginBottom="8dp"
                         android:textColor="@android:color/black"/>
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radioButtonCard"
+                <!-- Nom sur la carte -->
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Carte bancaire"
-                        android:drawableStart="@drawable/ic_credit_card"
-                        android:drawablePadding="12dp"/>
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radioButtonPaypal"
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextCardName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nom sur la carte"
+                            android:inputType="textPersonName"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Numéro de Carte Bancaire -->
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="PayPal"
-                        android:drawableStart="@drawable/ic_paypal_new2"
-                        android:drawablePadding="12dp"/>
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_credit_card">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextCardNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Numéro de carte"
+                            android:inputType="number"
+                            android:maxLength="16"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Date d'expiration et CVV -->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextExpiryDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="MM/YY"
+                                android:inputType="datetime"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                            android:layout_width="16dp"
+                            android:layout_height="match_parent"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextCVV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CVV"
+                                android:inputType="numberPassword"
+                                android:maxLength="3"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Bouton de Validation -->
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnConfirmOrder"
                 android:layout_width="match_parent"

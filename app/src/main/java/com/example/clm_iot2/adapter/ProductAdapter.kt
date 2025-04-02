@@ -1,6 +1,4 @@
 import android.os.Bundle
-import android.provider.Settings.Global.putInt
-import android.provider.Settings.Global.putString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.Product
+import retrofit2.Call
 
 class ProductAdapter(
     private var products: List<Product>,

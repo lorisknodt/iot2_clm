@@ -15,4 +15,6 @@
     <string name="menu_tracking">Tracking</string>
 
     <string name="description_image_produit">Description</string>
+
+    <string name="google_api_key">AIzaSyDjXhpvF9CbRi_tZFf3xgBQA5rGX5WbiyA</string>
 </resources>

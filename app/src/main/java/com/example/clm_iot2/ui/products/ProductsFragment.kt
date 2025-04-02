@@ -2,23 +2,26 @@ package com.example.clm_iot2.ui.products
 
 import CartViewModel
 import ProductAdapter
+import ProductViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clm_iot2.R
-import com.example.clm_iot2.model.Product
+import kotlinx.coroutines.launch
 
 class ProductsFragment : Fragment() {
 
     private val cartViewModel: CartViewModel by activityViewModels()
+    private val productViewModel: ProductViewModel by activityViewModels()  // Ajout du ViewModel des produits
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,26 +33,32 @@ class ProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Récupère le RecyclerView depuis le layout
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewProduits)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
-        // Définit le LayoutManager (ici, LinearLayoutManager pour une liste verticale)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Crée une liste de produits (pour l'instant, définis en dur)
-        val produits = listOf(
-            Product(1, "Téléphone","Samsung galaxy S29 24gb RAM telephone de goat", 299.99, R.drawable.ic_television, 1, 1),
-            Product(2, "Télévision", "Samsung galaxy television superflat 2.3mm thick GOD DAYUM",499.99, R.drawable.ic_television, 1, 1)
-            // Ajouter d'autres produits ici
-        )
+        // Observer pour les produits
+        productViewModel.products.observe(viewLifecycleOwner, Observer { produits ->
+            // Cacher la ProgressBar une fois les produits chargés
+            progressBar.visibility = View.GONE
 
-        // Associe l'adaptateur au RecyclerView
-        recyclerView.adapter = ProductAdapter(produits) { product ->
-            // Logique d'ajout au panier, par exemple :
-            cartViewModel.addProductToCart(product)
-            cartViewModel.getCartProducts()  // Affiche les produits dans la console pour vérifier
-            Toast.makeText(context, "${product.nom} ajouté au panier", Toast.LENGTH_SHORT).show()
-        }
+            // Vérifier si la liste des produits est vide
+            if (produits.isNullOrEmpty()) {
+                Toast.makeText(context, "Aucun produit trouvé", Toast.LENGTH_SHORT).show()
+            } else {
+                // Afficher les produits dans le RecyclerView
+                recyclerView.adapter = ProductAdapter(produits) { product ->
+                    cartViewModel.addProductToCart(product)
+                    Toast.makeText(context, "${product.nom} ajouté au panier", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
+        // Affichage du loader pendant la récupération des données
+        progressBar.visibility = View.VISIBLE
+
+        // Lancer la récupération des produits
+        productViewModel.fetchProducts()  // Appeler la fonction pour récupérer les produits
     }
-
 }
