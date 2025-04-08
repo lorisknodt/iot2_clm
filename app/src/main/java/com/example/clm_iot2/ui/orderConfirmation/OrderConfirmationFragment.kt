@@ -1,11 +1,14 @@
 package com.example.clm_iot2.ui.orderConfirmation
 
+import CartViewModel
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.NewAddress
 import com.example.clm_iot2.model.OrderItem
@@ -17,6 +20,9 @@ import com.google.android.material.textfield.TextInputEditText
 class OrderConfirmationFragment : Fragment() {
 
     private lateinit var orderRepository: OrderRepository
+
+    // Utilisation de activityViewModels pour partager le ViewModel avec CartFragment
+    private val cartViewModel: CartViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,10 +66,18 @@ class OrderConfirmationFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            // Création de l'objet OrderRequest
+            // Récupération des articles du panier depuis le ViewModel
+            val cartItems = cartViewModel.getCartProducts()
+
+            // Création de la liste des items pour la commande
+            val orderItems = cartItems.map { item ->
+                OrderItem(item.id, item.quantity)
+            }
+
+            // Création de l'objet OrderRequest avec les données dynamiques du panier
             val orderRequest = OrderRequest(
-                orderItemsCreateDTOList = listOf(OrderItem(9007199254740991, 1073741824)),
-                adresseId = 5,
+                orderItemsCreateDTOList = orderItems,
+                adresseId = null,  // Supposition parce que l'instance existe pas encore je crois
                 newAddress = NewAddress(
                     street = street,
                     city = city,
@@ -72,11 +86,17 @@ class OrderConfirmationFragment : Fragment() {
                     country = country
                 )
             )
+            // Récupération des articles du panier depuis le ViewModel
+
+            // Affichage des produits dans les logs pour tester
+            cartItems.forEach { item ->
+                Log.d("OrderConfirmation", "Product-id: ${item.id}, Produit: ${item.nom}, Quantité: ${item.quantity}, Prix: ${item.prix}")
+            }
 
             // Appel au repository pour créer la commande
-            /*orderRepository.createOrder(orderRequest) { success, message ->
+            orderRepository.createOrder(orderRequest) { success, message ->
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            }*/
+            }
         }
     }
 }

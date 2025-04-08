@@ -12,4 +12,13 @@ class ProductRepository {
             null
         }
     }
+
+    suspend fun getProductsByCategory(category: String): List<Product> {
+        return try {
+            RetrofitInstance.api.getProductsByCategory(category)
+        } catch (e: Exception) {
+            // En cas d'erreur, retourne une liste vide
+            emptyList() // Fonction Kotlin qui retourne une liste vide
+        }
+    }
 }

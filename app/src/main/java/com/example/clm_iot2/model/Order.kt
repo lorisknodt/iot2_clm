@@ -2,7 +2,7 @@ package com.example.clm_iot2.model
 
 data class OrderRequest(
     val orderItemsCreateDTOList: List<OrderItem>,
-    val adresseId: Int,
+    val adresseId: Int?,
     val newAddress: NewAddress
 )
 
@@ -13,7 +13,7 @@ data class OrderResponse(
 )
 
 data class OrderItem(
-    val productId: Long,
+    val productId: Int,
     val quantity: Int
 )
 
