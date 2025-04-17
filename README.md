@@ -47,6 +47,7 @@ Le projet suit l'architecture MVVM (Model - View - ViewModel) pour une meilleure
 - **ViewModel** : Gère les interactions entre le Model et la View via des LiveData.
 
 ## Arborescence du projet
+```bash
 app/
 ├── java/com/example/clm_iot2/
 │   ├── adapter/                  # Contient les classes d’adaptateurs pour lier les objets à l'interface graphique (ex : ProductAdapter, OrderAdapter, ...)
@@ -69,26 +70,7 @@ app/
 │   ├── values/                   # Ressources partagées : couleurs, chaînes, thèmes, dimensions, etc.
 │
 ├── AndroidManifest.xml          # Déclaration des composants de l'application (activités, permissions, etc.)
-
-
-app/
-├── java/com/example/clm_iot2/
-│   ├── adapter/                  # Adaptateurs RecyclerView (ex: ProductAdapter, OrderAdapter)
-│   ├── model/                    # Modèles de données (Product, Order, Category, etc.)
-│   ├── network/                  # Interfaces Retrofit pour les appels API
-│   ├── repository/               # Gestion des données (API, logique métier, etc.)
-│   ├── ui/                       # Interface utilisateur (découpée par fonctionnalités)
-│   │   ├── home/                 # Écrans liés à l’accueil et aux produits
-│   │   ├── cart/                 # Écrans et logique liés au panier
-│   │   └── orders/               # Écrans de consultation et gestion des commandes
-│   └── MainActivity.kt           # Activité principale qui héberge les fragments
-│
-├── res/
-│   ├── layout/                   # Fichiers XML d’interface utilisateur (fragments, items)
-│   ├── drawable/                 # Ressources graphiques (icônes, fonds, badges, etc.)
-│   └── values/                   # Fichiers de configuration XML (couleurs, chaînes, styles)
-│
-├── AndroidManifest.xml          # Déclaration des composants Android (permissions, activités, etc.)
+```
 
 ## 🛠️ Technologies et outils
 
