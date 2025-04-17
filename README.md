@@ -1,7 +1,8 @@
 
 # Projet Android - CLM
 
-Ce projet est une application mobile Android développée en Kotlin utilisant l'architecture MVVM. L'application permet d'afficher une liste de produits, de gérer un panier d'achat, de filtrer les produits par catégorie et de gérer le détail d'un produit.
+Ce projet est une application mobile Android développée en Kotlin utilisant l'architecture MVVM. L'application permet d'afficher une liste de produits, de gérer un panier d'achat, de filtrer les produits par catégorie et de gérer le détail d'un produit. Elle permet aussi de faire une commande sur base des produits, d'entrer une adresse de livraison, et de valider la commande à l'aide d'un payement 3DSecure.
+Les commandes d'un utilisateur peuvent être affichés dans une page respective et pour chaque commande, on peut y visualiser le détail.
 
 
 ## 📋 Fonctionnalités mises en place
@@ -37,6 +38,22 @@ Affichage des produits ajoutés au panier avec :
 ### Finalisation d'une commande
 - Ajout de produits dans le panier pour la finalisation de la commande.
 - Enregistrement des informations nécessaires à la commande (produits, quantité, etc.).
+
+### Commandes
+- Numéro de la commande
+- La date de creation de la commande
+- Son statut de livraison
+- L'addresse de livraison
+- Le prix total de la commande
+
+### Détail d'une commande
+- Idem que la page commande
+- Les produits de la commande
+
+
+### Rafraichissement dynamique 
+- Pour la page Produits
+- Pour la page Commandes
 
 ## 🧩 Architecture du projet
 
