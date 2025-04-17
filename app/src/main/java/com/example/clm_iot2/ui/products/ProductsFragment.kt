@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.Category
 import com.example.clm_iot2.ui.category.CategoryViewModel
@@ -40,6 +41,11 @@ class ProductsFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewProduits)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+        val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            categoryViewModel.fetchProducts()
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -71,6 +77,7 @@ class ProductsFragment : Fragment() {
         categoryViewModel.products.observe(viewLifecycleOwner) { produits ->
             // Cacher la ProgressBar une fois les produits chargés
             progressBar.visibility = View.GONE
+            swipeRefreshLayout.isRefreshing = false
 
             // Vérifier si la liste des produits est vide
             if (produits.isNullOrEmpty()) {

@@ -5,6 +5,32 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="primary_color">#1976D2</color>
+    <color name="primary_dark_color">#0D47A1</color>
+    <color name="accent_color">#FF5722</color>
+
+    <!-- Couleurs pour le texte -->
+    <color name="primary_text_color">#212121</color>
+    <color name="secondary_text_color">#757575</color>
+
+    <!-- Couleurs d'arrière-plan -->
+    <color name="background_color">#F5F5F5</color>
+    <color name="card_background_color">#FFFFFF</color>
+
+    <!-- Autres éléments d'interface -->
+    <color name="divider_color">#E0E0E0</color>
+    <color name="image_placeholder_bg">#EEEEEE</color>
+
+    <!-- Couleurs standard -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Couleurs pour les statuts de commande -->
+    <color name="status_pending">#FFC107</color>  <!-- Jaune pour en attente -->
+    <color name="status_confirmed">#2196F3</color>  <!-- Bleu pour en confirmé -->
+    <color name="status_shipped">#c203fc</color>  <!-- Violet pour expédié -->
+    <color name="status_delivered">#4CAF50</color>  <!-- Vert pour livré -->
+    <color name="status_cancelled">#F44336</color>  <!-- Rouge pour annulé -->
 </resources>

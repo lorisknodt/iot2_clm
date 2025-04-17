@@ -36,7 +36,7 @@ class OrderConfirmationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialiser le repository
-        orderRepository = OrderRepository(requireContext())
+        orderRepository = OrderRepository()
 
         // Champs de l'adresse
         val editTextStreet = view.findViewById<TextInputEditText>(R.id.editTextStreet)

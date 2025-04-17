@@ -1,14 +1,17 @@
 package com.example.clm_iot2.repository
 
 import android.content.Context
-import android.widget.Toast
+import com.example.clm_iot2.model.Order
 import com.example.clm_iot2.model.OrderRequest
 import com.example.clm_iot2.model.OrderResponse
+import com.example.clm_iot2.model.SingleOrderResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OrderRepository(private val context: Context) {
+class OrderRepository{
 
     // Fonction pour créer la commande
     fun createOrder(orderRequest: OrderRequest, callback: (Boolean, String) -> Unit) {
@@ -30,4 +33,27 @@ class OrderRepository(private val context: Context) {
                 }
             })
     }
+
+    // Nouvelle fonction pour récupérer les commandes
+    suspend fun getOrders(): Result<List<Order>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val orders = RetrofitInstance.api.getOrders()  // Ici, APIService doit fournir une méthode suspendue : suspend fun getOrders(): Response<List<Order>> ou directement List<Order>
+                Result.success(orders)
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
+    }
+    suspend fun getOrderDetails(orderId: Int): Result<SingleOrderResponse> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val orderEntity = RetrofitInstance.api.getOrderById(orderId)
+                Result.success(orderEntity)  // Retourne l'objet Order en cas de succès
+            } catch (e: Exception) {
+                Result.failure<SingleOrderResponse>(e)  // Retourne une erreur en cas d'exception
+            }
+        }
+    }
+
 }

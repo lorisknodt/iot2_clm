@@ -20,7 +20,7 @@
     <fragment
             android:id="@+id/singleProductFragment"
             android:name="com.example.clm_iot2.ui.singleproduct.SingleProductFragment"
-            android:label="Détail" />
+            android:label="Détail du produit" />
 
 
     <fragment
@@ -41,7 +41,18 @@
             android:id="@+id/nav_orders"
             android:name="com.example.clm_iot2.ui.orders.OrdersFragment"
             android:label="@string/menu_orders"
-            tools:layout="@layout/fragment_orders"/>
+            tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_orderFragment_to_singleOrderFragment"
+            app:destination="@+id/nav_singleorder" />
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/nav_singleorder"
+            android:name="com.example.clm_iot2.ui.singleorder.SingleOrderFragment"
+            android:label="Détail de la commande"/>
+
 
     <fragment
             android:id="@+id/nav_profile"
