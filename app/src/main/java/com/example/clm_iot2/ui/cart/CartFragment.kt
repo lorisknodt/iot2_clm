@@ -52,8 +52,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
                 updateCartVisibility(updatedProducts.size, emptyCartLayout, btnPasserCommande)
                 calculerTotal()
-            }
-
+            },
         )
 
         recyclerViewCart.adapter = cartAdapter

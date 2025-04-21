@@ -1,13 +1,24 @@
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import android.util.Log
+import androidx.lifecycle.*
+import com.example.clm_iot2.data.repository.StockRepository
 import com.example.clm_iot2.model.Product  // Remplace avec ton import réel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CartViewModel : ViewModel() {
 
+    private val stockRepository = StockRepository()
+
     // Liste normale (sans LiveData) pour tester plus simplement
     private val cartProducts = mutableListOf<Product>()
+
+
+    private val _availableStock = MutableLiveData<Map<Int, Int>>()
+    val availableStock: LiveData<Map<Int, Int>> = _availableStock
+
+    init {
+        _availableStock.value = emptyMap()
+    }
 
     // Retourne la liste des produits du panier
     fun getCartProducts(): List<Product> {
@@ -23,8 +34,13 @@ class CartViewModel : ViewModel() {
             existingProduct.quantity += produit.quantity
             println("✅ Produit déjà présent dans le panier : ${existingProduct.nom}, Nouvelle quantité : ${existingProduct.quantity}")
         } else {
-            cartProducts.add(produit)
-            println("🆕 Nouveau produit ajouté au panier : ${produit.nom}, Quantité : ${produit.quantity}")
+            // Récupère le stock avant d'ajouter au panier
+            viewModelScope.launch(Dispatchers.IO) {
+                val stock = stockRepository.getAvailableStock(produit.id)
+                produit.availableStock = stock
+                cartProducts.add(produit)
+                println("🆕 Nouveau produit ajouté au panier : ${produit.nom}, Stock dispo : $stock")
+            }
         }
     }
 

@@ -19,6 +19,17 @@ data class Product (
 
     var quantity: Int = 1,
 
+    var availableStock: Int = Int.MAX_VALUE,
+
     @SerializedName("stockId")
     val stock: Int
+)
+
+data class StockResponse (
+    val id: Int,
+    val productId: Int,
+    val quantity: Int,
+    val stockMin: Int,
+    val stockMax: Int,
+    val lastUpdated: String
 )

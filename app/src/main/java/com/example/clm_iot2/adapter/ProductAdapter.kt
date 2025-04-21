@@ -32,7 +32,7 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProduitViewHolder, position: Int) {
         val produit = products[position]
-        holder.iconeProduit.setImageResource(produit.iconeResId)
+        holder.iconeProduit.setImageResource(R.drawable.ic_television)
         holder.nomProduit.text = produit.nom
         holder.descriptionProduct.text = produit.description
         holder.prixProduit.text = "${produit.prix} €"
@@ -42,7 +42,7 @@ class ProductAdapter(
                 putString("name", produit.nom)
                 putString("description", produit.description)
                 putDouble("price", produit.prix)
-                putInt("imageResId", produit.iconeResId)  // Si c'est une ressource locale
+                putInt("imageResId", R.drawable.ic_television)  // Si c'est une ressource locale
             }
 
             holder.itemView.findNavController().navigate(

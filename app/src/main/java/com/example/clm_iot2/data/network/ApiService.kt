@@ -20,6 +20,10 @@ interface ApiService {
     @POST("/v1/products/ids")
     fun getProductsByIDs(@Body productIds: List<Int>): Call<List<OrderProduct>>
 
+    // STOCK CALLS
+    @GET("v1/stock/{productId}")
+    suspend fun getStockByProductId(@Path("productId") productId: Int): StockResponse
+
     // ORDER CALLS
     @POST("/v1/order")
     fun createOrder(@Body orderRequest: OrderRequest): Call<OrderResponse>
@@ -35,5 +39,10 @@ interface ApiService {
     // CATEGORY CALLS
     @GET("/v1/categories")
     suspend fun getCategories(): List<Category>
+
+
+    // ADDRESS CALLS
+    @GET("/v1/addresses/{clientId}")
+    suspend fun getAddresses(@Path("clientId") clientId: Int): List<Address>
 
 }

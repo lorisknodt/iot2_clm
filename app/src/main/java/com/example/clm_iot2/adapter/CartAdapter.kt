@@ -25,23 +25,28 @@ class CartAdapter(
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val product = produits[position]
 
-        holder.iconeProduit.setImageResource(product.iconeResId)
-        holder.nomProduit.text = product.nom
-        holder.prixProduit.text = "${product.prix} €"
-        holder.tvQuantity.text = product.quantity.toString()
+        holder.iconResId.setImageResource(R.drawable.ic_television) //de base product.iconeResId faudra changer si on gère les icones
+        holder.productName.text = product.nom
+        holder.productPrice.text = "${product.prix} €"
+        holder.productQuantity.text = product.quantity.toString()
 
         // Gestion de l'ajout d'une unité
         holder.btnIncrease.setOnClickListener {
-            product.quantity++
-            holder.tvQuantity.text = product.quantity.toString()
-            onQuantityChange(product, product.quantity)
+            if (product.quantity < product.availableStock) {
+                product.quantity++
+                holder.productQuantity.text = product.quantity.toString()
+                onQuantityChange(product, product.quantity)
+            } else {
+                Toast.makeText(holder.itemView.context, "Stock max atteint (${product.availableStock})", Toast.LENGTH_SHORT).show()
+            }
         }
+
 
         // Gestion de la diminution de la quantité
         holder.btnDecrease.setOnClickListener {
             if (product.quantity > 1) {
                 product.quantity--
-                holder.tvQuantity.text = product.quantity.toString()
+                holder.productQuantity.text = product.quantity.toString()
                 onQuantityChange(product, product.quantity)
             }
         }
@@ -80,10 +85,10 @@ class CartAdapter(
 
     // ViewHolder pour les éléments du panier
     inner class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val iconeProduit: ImageView = itemView.findViewById(R.id.iconeProduitCart)
-        val nomProduit: TextView = itemView.findViewById(R.id.nomProduitCart)
-        val prixProduit: TextView = itemView.findViewById(R.id.prixProduitCart)
-        val tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
+        val iconResId: ImageView = itemView.findViewById(R.id.iconeProduitCart)
+        val productName: TextView = itemView.findViewById(R.id.nomProduitCart)
+        val productPrice: TextView = itemView.findViewById(R.id.prixProduitCart)
+        val productQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
         val btnDecrease: Button = itemView.findViewById(R.id.btnDecrease)
         val btnIncrease: Button = itemView.findViewById(R.id.btnIncrease)
         val btnRemove: Button = itemView.findViewById(R.id.btnRemove)
