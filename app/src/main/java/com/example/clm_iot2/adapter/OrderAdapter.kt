@@ -35,7 +35,7 @@ class OrderAdapter(
 
         holder.orderId.text = "${order.id}"
         holder.orderDateTime.text = "${order.orderDate} à ${order.orderTime}"
-        holder.orderStatus.text = "Statut : ${order.status.capitalize()}"
+        holder.orderStatus.text = "${order.status.capitalize()}"
         holder.orderTotal.text = "${"%.2f".format(order.total)} €"
 
         val address = order.address

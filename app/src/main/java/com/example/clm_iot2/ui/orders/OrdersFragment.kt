@@ -39,6 +39,16 @@ class OrdersFragment : Fragment() {
 
         val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
 
+        val exploreButton = view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnExploreProducts)
+        exploreButton.setOnClickListener {
+            // Exemple d'action : naviguer vers un autre fragment
+            findNavController().navigate(R.id.action_orderFragment_to_productsFragment)
+
+            // Ou simplement afficher un message temporaire pour tester
+            // Toast.makeText(requireContext(), "Explorer les données cliqué", Toast.LENGTH_SHORT).show()
+        }
+
+
         // Passer l'adaptateur à la NavController
         orderAdapter = OrderAdapter(emptyList())
 

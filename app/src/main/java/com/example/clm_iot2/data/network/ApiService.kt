@@ -10,6 +10,10 @@ import retrofit2.http.POST
 // Interface qui contient les endpoints
 interface ApiService {
 
+    // USER CALLS
+    @GET("v1/user/{userId}")
+    suspend fun getUserDetails(@Path("userId") userId: Int): User
+    
     // PRODUCT CALLS
     @GET("v1/products")
     suspend fun getProducts(): List<Product>

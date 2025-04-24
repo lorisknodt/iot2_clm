@@ -1,4 +1,3 @@
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.clm_iot2.data.repository.StockRepository
 import com.example.clm_iot2.model.Product  // Remplace avec ton import réel
@@ -32,14 +31,14 @@ class CartViewModel : ViewModel() {
 
         if (existingProduct != null) {
             existingProduct.quantity += produit.quantity
-            println("✅ Produit déjà présent dans le panier : ${existingProduct.nom}, Nouvelle quantité : ${existingProduct.quantity}")
+            println("✅ Produit déjà présent dans le panier : ${existingProduct.name}, Nouvelle quantité : ${existingProduct.quantity}")
         } else {
             // Récupère le stock avant d'ajouter au panier
             viewModelScope.launch(Dispatchers.IO) {
                 val stock = stockRepository.getAvailableStock(produit.id)
                 produit.availableStock = stock
                 cartProducts.add(produit)
-                println("🆕 Nouveau produit ajouté au panier : ${produit.nom}, Stock dispo : $stock")
+                println("🆕 Nouveau produit ajouté au panier : ${produit.name}, Stock dispo : $stock")
             }
         }
     }
@@ -49,14 +48,14 @@ class CartViewModel : ViewModel() {
         val productIndex = cartProducts.indexOfFirst { it.id == produit.id }
         if (productIndex != -1) {
             cartProducts[productIndex].quantity = newQuantity
-            println("🔄 Quantité mise à jour : ${cartProducts[productIndex].nom}, Nouvelle quantité : ${newQuantity}")
+            println("🔄 Quantité mise à jour : ${cartProducts[productIndex].name}, Nouvelle quantité : ${newQuantity}")
         }
     }
 
     // Supprimer un produit du panier
     fun removeProduct(produit: Product) {
         cartProducts.removeAll { it.id == produit.id }
-        println("❌ Produit supprimé du panier : ${produit.nom}")
+        println("❌ Produit supprimé du panier : ${produit.name}")
     }
 
     // Fonction pour vider complètement le panier

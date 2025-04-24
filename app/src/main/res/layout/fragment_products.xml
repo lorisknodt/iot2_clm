@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".ui.products.ProductsFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -14,19 +15,22 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <!-- Titre de la section catégories -->
+            <!-- Titre de la section catégories avec style modernisé -->
             <TextView
                     android:id="@+id/textViewCategoriesTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Catégories"
-                    android:textSize="18sp"
+                    android:text="@string/categories"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-medium"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -36,42 +40,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="8dp"
-                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="12dp"
+                    android:paddingHorizontal="12dp"
                     android:clipToPadding="false"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
+                    android:overScrollMode="never"
                     app:layout_constraintTop_toBottomOf="@id/textViewCategoriesTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Séparateur léger entre les sections -->
+            <!-- Séparateur avec shadow subtle -->
             <View
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E0E0E0"
+                    android:layout_height="4dp"
+                    android:background="#F5F5F5"
+                    android:elevation="1dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@id/recyclerViewCategories" />
 
-            <!-- Titre de la section produits -->
+            <!-- Titre de la section produits avec style modernisé -->
             <TextView
                     android:id="@+id/textViewProduitsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Produits"
-                    android:textSize="18sp"
+                    android:text="@string/products"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@id/divider"
                     app:layout_constraintStart_toStartOf="parent" />
 
-            <!-- RecyclerView pour afficher la liste des produits -->
+            <!-- RecyclerView pour afficher la liste des produits - suppression de layoutAnimation -->
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewProduits"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
+                    android:paddingHorizontal="8dp"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
                     app:layout_constraintTop_toBottomOf="@id/textViewProduitsTitle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -80,9 +91,10 @@
             <!-- ProgressBar qui sera affichée pendant le chargement des produits -->
             <ProgressBar
                     android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimary"
                     android:visibility="gone"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -91,4 +103,80 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!-- Layout d'erreur qui s'affichera en cas d'échec de chargement -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/errorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+                android:id="@+id/errorImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_loading_error"
+                android:contentDescription="@string/error_image"
+                app:layout_constraintBottom_toTopOf="@+id/errorTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintVertical_bias="0.45" />
+
+        <TextView
+                android:id="@+id/errorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/error_loading_products"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/errorImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/errorMessage" />
+
+        <TextView
+                android:id="@+id/errorMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/error_fetch_try_again"
+                android:textSize="16sp"
+                android:textColor="#757575"
+                android:gravity="center"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/errorTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/retryButton" />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/retry"
+                android:textAllCaps="false"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_marginTop="24dp"
+                app:cornerRadius="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/errorMessage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

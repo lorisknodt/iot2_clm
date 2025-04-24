@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.Product
-import retrofit2.Call
 
 class ProductAdapter(
     private var products: List<Product>,
@@ -33,16 +32,18 @@ class ProductAdapter(
     override fun onBindViewHolder(holder: ProduitViewHolder, position: Int) {
         val produit = products[position]
         holder.iconeProduit.setImageResource(R.drawable.ic_television)
-        holder.nomProduit.text = produit.nom
+        holder.nomProduit.text = produit.name
         holder.descriptionProduct.text = produit.description
-        holder.prixProduit.text = "${produit.prix} €"
+        holder.prixProduit.text = "${produit.price} €"
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
-                putString("name", produit.nom)
+                putInt("id", produit.id)
+                putString("name", produit.name)
                 putString("description", produit.description)
-                putDouble("price", produit.prix)
-                putInt("imageResId", R.drawable.ic_television)  // Si c'est une ressource locale
+                putDouble("price", produit.price)
+                putInt("imageResId", R.drawable.ic_television) // Si c'est une ressource locale
+                putInt("stock", produit.stock)
             }
 
             holder.itemView.findNavController().navigate(

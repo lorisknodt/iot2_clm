@@ -6,6 +6,12 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
+    <!-- Couleurs de base -->
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#FF4081</color>
+
 
     <color name="primary_color">#1976D2</color>
     <color name="primary_dark_color">#0D47A1</color>
@@ -33,4 +39,21 @@
     <color name="status_shipped">#c203fc</color>  <!-- Violet pour expédié -->
     <color name="status_delivered">#4CAF50</color>  <!-- Vert pour livré -->
     <color name="status_cancelled">#F44336</color>  <!-- Rouge pour annulé -->
+
+    <!-- Couleurs pour le fragment de profil -->
+    <color name="colorPrimary">#FF9900</color>
+    <color name="colorPrimaryDark">#E68A00</color>
+    <color name="colorAccent">#146EB4</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_tertiary">#9E9E9E</color>
+    <color name="text_danger">#D32F2F</color>
+    <color name="profile_placeholder_bg">#146EB4</color>
+
+
+
+    <!-- Couleurs spécifiques au fragment de detail d'un produit -->
+    <color name="background">#F5F5F5</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="price_background">#4CAF50</color>
 </resources>

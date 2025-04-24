@@ -35,7 +35,7 @@ class OrderProductsAdapter(private val products: List<OrderProduct>) :
         fun bind(product: OrderProduct) {
             productName.text = product.name
             productVariant.text = product.description
-            productQuantity.text = "Qté: ${product.quantity}"
+            productQuantity.text = itemView.context.getString(R.string.singleorder_quantiy, product.quantity.toString())
             productPrice.text = String.format("%.2f €", product.price * product.quantity)
             productImage.setImageResource(product.imageResId)
         }

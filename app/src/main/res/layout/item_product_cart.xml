@@ -33,7 +33,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:maxLines="2"
@@ -56,74 +55,85 @@
                 app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
                 app:layout_constraintTop_toBottomOf="@id/nomProduitCart" />
 
-        <!-- Contrôleur de quantité -->
-        <LinearLayout
-                android:id="@+id/quantityControlLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/quantity_control_background"
-                android:gravity="center_vertical"
-                app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
-                app:layout_constraintTop_toBottomOf="@id/prixProduitCart">
-
-            <!-- Bouton pour diminuer la quantité -->
-            <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnDecrease"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:paddingTop="0dp"
-                    android:paddingBottom="0dp"
-                    app:cornerRadius="0dp"
-                    app:icon="@drawable/ic_cart_remove"
-                    app:iconGravity="textStart"
-                    app:iconPadding="0dp"
-                    app:iconSize="18dp"
-                    style="@style/Widget.Material3.Button.TextButton.Icon" />
-
-            <!-- Affichage de la quantité -->
-            <TextView
-                    android:id="@+id/tvQuantity"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:text="1"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif-medium" />
-
-            <!-- Bouton pour augmenter la quantité -->
-            <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnIncrease"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:paddingTop="0dp"
-                    android:paddingBottom="0dp"
-                    app:cornerRadius="0dp"
-                    app:icon="@drawable/ic_cart_add"
-                    app:iconGravity="textStart"
-                    app:iconPadding="0dp"
-                    app:iconSize="18dp"
-                    style="@style/Widget.Material3.Button.TextButton.Icon" />
-        </LinearLayout>
-
-        <!-- Bouton pour supprimer le produit du panier -->
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnRemove"
-                android:layout_width="wrap_content"
+        <!-- Container pour les contrôles du bas -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Supprimer"
-                android:textSize="12sp"
-                app:icon="@drawable/ic_cart_delete"
-                app:iconGravity="textStart"
-                app:iconPadding="4dp"
-                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/prixProduitCart"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            <!-- Contrôleur de quantité -->
+            <LinearLayout
+                    android:id="@+id/quantityControlLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/quantity_control_background"
+                    android:gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                <!-- Bouton pour diminuer la quantité -->
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDecrease"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        app:cornerRadius="0dp"
+                        app:icon="@drawable/ic_cart_remove"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        app:iconSize="18dp"
+                        style="@style/Widget.Material3.Button.TextButton.Icon" />
+
+                <!-- Affichage de la quantité -->
+                <TextView
+                        android:id="@+id/tvQuantity"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:text="1"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-medium" />
+
+                <!-- Bouton pour augmenter la quantité -->
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnIncrease"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        app:cornerRadius="0dp"
+                        app:icon="@drawable/ic_cart_add"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        app:iconSize="18dp"
+                        style="@style/Widget.Material3.Button.TextButton.Icon" />
+            </LinearLayout>
+
+            <!-- Bouton pour supprimer le produit du panier -->
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    app:icon="@drawable/ic_cart_delete"
+                    app:iconGravity="textStart"
+                    app:iconPadding="4dp"
+                    style="@style/Widget.Material3.Button.TextButton.Icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -112,13 +112,13 @@ class SingleOrderFragment : Fragment() {
     }
 
     private fun displayOrderDetails(view: View, order: SingleOrderResponse) {
-        view.findViewById<TextView>(R.id.orderId).text = "Commande #${order.id}"
+        view.findViewById<TextView>(R.id.orderId).text = "${order.id}"
         view.findViewById<TextView>(R.id.orderDate).text = "${order.orderDate} à ${order.orderTime}"
-        view.findViewById<TextView>(R.id.orderStatus).text = "Statut : ${order.status.capitalize()}"
-        view.findViewById<TextView>(R.id.orderTotal).text = "Total : ${"%.2f".format(order.total)} €"
+        view.findViewById<TextView>(R.id.orderStatus).text = "${order.status.capitalize()}"
+        view.findViewById<TextView>(R.id.orderTotal).text = "${"%.2f".format(order.total)} €"
         val address = order.address
         view.findViewById<TextView>(R.id.orderAddress).text =
-            "Adresse : ${address.street} ${address.number}, ${address.zipCode} ${address.city}, ${address.country}"
+            "${address.street} ${address.number}, ${address.zipCode} ${address.city}, ${address.country}"
     }
 
     private fun displayError(view: View, exception: Throwable?) {

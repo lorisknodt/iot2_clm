@@ -20,13 +20,13 @@
     <fragment
             android:id="@+id/singleProductFragment"
             android:name="com.example.clm_iot2.ui.singleproduct.SingleProductFragment"
-            android:label="Détail du produit" />
+            android:label="@string/menu_product_detail" />
 
 
     <fragment
             android:id="@+id/nav_cart"
             android:name="com.example.clm_iot2.ui.cart.CartFragment"
-            android:label="Panier">
+            android:label="@string/menu_cart">
         <action
                 android:id="@+id/action_cartFragment_to_singleProductFragment"
                 app:destination="@id/singleProductFragment"/>
@@ -46,29 +46,53 @@
             android:id="@+id/action_orderFragment_to_singleOrderFragment"
             app:destination="@+id/nav_singleorder" />
 
+        <action
+            android:id="@+id/action_orderFragment_to_productsFragment"
+            app:destination="@+id/nav_products" />
+
     </fragment>
 
     <fragment
             android:id="@+id/nav_singleorder"
             android:name="com.example.clm_iot2.ui.singleorder.SingleOrderFragment"
-            android:label="Détail de la commande"/>
+            android:label="@string/menu_order_detail"/>
 
 
     <fragment
             android:id="@+id/nav_profile"
-            android:name="com.example.clm_iot2.ui.orders.OrdersFragment"
+            android:name="com.example.clm_iot2.ui.profile.ProfileFragment"
             android:label="@string/menu_profile"
-            tools:layout="@layout/fragment_orders"/>
+            tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_orderFragment"
+            app:destination="@id/nav_orders"/>
+
+        <action
+            android:id="@+id/action_profileFragment_to_developmentFragment"
+            app:destination="@id/nav_development"/>
+
+    </fragment>
 
     <fragment
-            android:id="@+id/nav_tracking"
-            android:name="com.example.clm_iot2.ui.orders.OrdersFragment"
+            android:id="@+id/nav_development"
+            android:name="com.example.clm_iot2.ui.development.DevelopmentFragment"
             android:label="@string/menu_tracking"
-            tools:layout="@layout/fragment_orders"/>
+            tools:layout="@layout/fragment_in_development"/>
+
     <fragment
             android:id="@+id/orderConfirmationFragment"
             android:name="com.example.clm_iot2.ui.orderConfirmation.OrderConfirmationFragment"
-            android:label="Confirmation de la commande" />
+            android:label="@string/menu_order_confirmation">
+        <action
+                android:id="@+id/action_orderConfirmation_to_paymentFragment"
+                app:destination="@id/paymentFragment"/>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/paymentFragment"
+            android:name="com.example.clm_iot2.ui.payment.PaymentFragment"
+            android:label="@string/menu_order_confirmation" />
 
 
 </navigation>

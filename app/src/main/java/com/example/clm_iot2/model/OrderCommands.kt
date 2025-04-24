@@ -7,7 +7,7 @@ data class OrderRequest(
 )
 
 data class OrderResponse(
-    val orderId: Long,
+    val id: Long,
     val status: String,
     val message: String
 )
@@ -44,5 +44,6 @@ data class NewAddress(
     val city: String,
     val number: String,
     val zipCode: String,
-    val country: String
+    val country: String,
+    val deliveryInstructions: String? = null
 )

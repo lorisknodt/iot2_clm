@@ -26,8 +26,8 @@ class CartAdapter(
         val product = produits[position]
 
         holder.iconResId.setImageResource(R.drawable.ic_television) //de base product.iconeResId faudra changer si on gère les icones
-        holder.productName.text = product.nom
-        holder.productPrice.text = "${product.prix} €"
+        holder.productName.text = product.name
+        holder.productPrice.text = "${product.price} €"
         holder.productQuantity.text = product.quantity.toString()
 
         // Gestion de l'ajout d'une unité
@@ -37,7 +37,8 @@ class CartAdapter(
                 holder.productQuantity.text = product.quantity.toString()
                 onQuantityChange(product, product.quantity)
             } else {
-                Toast.makeText(holder.itemView.context, "Stock max atteint (${product.availableStock})", Toast.LENGTH_SHORT).show()
+                Toast.makeText(holder.itemView.context,
+                    holder.itemView.context.getString(R.string.toast_max_stock_reached, product.availableStock.toString()), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -60,10 +61,10 @@ class CartAdapter(
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
-                putString("name", product.nom)
+                putString("name", product.name)
                 putString("description", product.description)
-                putDouble("price", product.prix)
-                putInt("imageResId", product.iconeResId)  // Si c'est une ressource locale
+                putDouble("price", product.price)
+                putInt("imageResId", R.drawable.ic_television)  // Si c'est une ressource locale
             }
 
             holder.itemView.findNavController().navigate(

@@ -20,11 +20,11 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private lateinit var recyclerViewCart: RecyclerView
     private lateinit var cartAdapter: CartAdapter
 
-    // Utilisation correcte de activityViewModels pour conserver les données
+    // Utilisation de activityViewModels pour conserver les données
     private val cartViewModel: CartViewModel by activityViewModels()
 
     private fun calculerTotal() {
-        val total = cartViewModel.getCartProducts().sumOf { it.prix * it.quantity }
+        val total = cartViewModel.getCartProducts().sumOf { it.price * it.quantity }
         view?.findViewById<TextView>(R.id.totalPrix)?.text = "Total : ${"%.2f".format(total)} €"
     }
 
@@ -65,7 +65,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
         btnPasserCommande.setOnClickListener {
             if (cartAdapter.itemCount == 0) {
-                Toast.makeText(requireContext(), "Votre panier est vide.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.toast_empty_cart), Toast.LENGTH_SHORT).show()
             } else {
                 requireView().findNavController().navigate(R.id.action_cartFragment_to_orderConfirmationFragment)
             }

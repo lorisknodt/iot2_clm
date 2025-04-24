@@ -69,7 +69,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Chargement"
+                            android:text="@string/loading"
                             android:textColor="@color/primary_text_color"
                             android:textSize="12sp" />
                 </LinearLayout>
@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Aucune commande trouvée"
+                        android:text="@string/no_orders_found"
                         android:textColor="@color/primary_text_color"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:gravity="center"
-                        android:text="Vous n'avez pas encore passé de commande. Parcourez nos produits et effectuez votre premier achat."
+                        android:text="@string/no_orders_yet_text"
                         android:textColor="@color/secondary_text_color"
                         android:textSize="14sp" />
 
@@ -119,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Explorer les produits"
+                        android:text="@string/explore_products"
                         android:textAllCaps="false"
                         app:cornerRadius="8dp" />
             </LinearLayout>

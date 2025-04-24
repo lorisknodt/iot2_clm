@@ -1,6 +1,8 @@
 package com.example.clm_iot2
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -11,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import com.example.clm_iot2.databinding.ActivityMainBinding
 import com.google.android.libraries.places.api.Places
 
@@ -42,6 +45,14 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_products, R.id.nav_cart, R.id.nav_orders, R.id.nav_profile, R.id.nav_tracking), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        handleDeepLink(intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleDeepLink(intent) // Appelle ici aussi, au cas où l'app est déjà ouverte
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -53,5 +64,29 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun handleDeepLink(intent: Intent?) {
+        intent?.data?.let { uri ->
+            if (uri.host == "payment-result") {
+                val status = uri.getQueryParameter("status") // "success" ou "failure"
+                val orderId = uri.getQueryParameter("orderId")?.toLongOrNull()
+
+                if (status != null && orderId != null) {
+                    val navController = findNavController(R.id.paymentFragment)
+                    val bundle = bundleOf("status" to status, "orderId" to orderId)
+
+                    if (status == "success") {
+                        //navController.navigate(R.id.action_global_paymentSuccessFragment, bundle)
+
+                        Log.d("MainActivity", "Succes du payement")
+                    } else {
+                        //navController.navigate(R.id.action_global_paymentFailureFragment, bundle)
+
+                        Log.d("MainActivity", "Failure du payement")
+                    }
+                }
+            }
+        }
     }
 }

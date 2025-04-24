@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidCLM</string>
+    <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
+    <string name="navigation_drawer_close">Fermer le menu de navigation</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">En-tête de navigation</string>
+    <string name="action_settings">Paramètres</string>
+
+    <!-- Différents menus -->
+    <string name="menu_products">Produits</string>
+    <string name="menu_cart">Panier</string>
+    <string name="menu_orders">Mes Commandes</string>
+    <string name="menu_profile">Mon Profil</string>
+    <string name="menu_tracking">Tracking</string>
+    <string name="menu_product_detail">Détails du produit</string>
+    <string name="menu_order_detail">Détails de la commande</string>
+    <string name="menu_order_confirmation">Confirmation de commande</string>
+
+    <string name="description_image_produit">Description</string>
+    <string name="loading">Chargement</string>
+    <string name="fold_unfold">Replier/Déplier</string>
+
+    <!-- Chaines pour le fragment de produits -->
+    <string name="categories">Catégories</string>
+    <string name="products">Produits</string>
+
+    <!-- Chaines pour le fragment de panier -->
+    <string name="empty_cart">Votre panier est vide, veuillez ajouter des produits.</string>
+    <string name="total_cart">Total : </string>
+    <string name="proceed_order_button">Passer la commande</string>
+    <string name="proceed_to_payment">Procéder au payement</string>
+
+    <!-- Chaines pour le fragment commandes -->
+    <string name="no_orders_found">Aucune commande trouvée</string>
+    <string name="no_orders_yet_text">Vous n\'avez pas encore passé de commande. Parcourez nos produits et effectuez votre premier achat.</string>
+    <string name="explore_products">Explorer les produits</string>
+    <string name="status_text">Statut</string>
+    <string name="order_text">Commande #</string>
+    <string name="date_text">Date</string>
+    <string name="delivery_address">Adresse de livraison</string>
+    <string name="total_text">Total</string>
+    <string name="ordered_items">Articles commandés</string>
+    <string name="show_details">Voir détails</string>
+
+    <!-- Chaînes pour le fragment de profil -->
+    <string name="profile_title">Mon profil</string>
+    <string name="contact_info">Informations de contact</string>
+    <string name="email">Email</string>
+    <string name="phone">Téléphone</string>
+    <string name="shipping_address">Adresse de livraison</string>
+    <string name="edit_address">Modifier l\'adresse</string>
+    <string name="address">Adresse</string>
+    <string name="order_history">Historique des commandes</string>
+    <string name="account_settings">Paramètres du compte</string>
+    <string name="logout">Déconnexion</string>
+    <string name="member_since">Membre depuis : %1$s</string>
+
+    <!-- Chaînes pour le fragment du panier / Confirmation d'une commande -->
+    <string name="option_garden">Dans le jardin</string>
+    <string name="option_carport">Sous le carport</string>
+    <string name="option_neighbor">Chez le voisin</string>
+    <string name="option_back_door">Devant la porte arrière</string>
+    <string name="option_other">Autre : %1$s</string>
+    <string name="other_text">Autre : </string>
+
+    <string name="in_case_of_absence_text">En cas d\'absence</string>
+    <string name="where_to_leave_package_text">Où déposer votre colis en cas d\'absence ?</string>
+    <string name="specify_where_to_leave_package_text">Précisez où déposer le colis (max. 50 caractères)</string>
+    <string name="zero_out_of_fifty">0/50</string>
+
+    <!-- Chaînes par rapport aux adresses -->
+    <string name="saved_addresses_text">Adresses enregistrées</string>
+    <string name="choose_address">Choisir une adresse</string>
+    <string name="address_and_number">Adresse (Rue et numéro)</string>
+    <string name="apartment_optional">Appartement, étage, etc. (optionnel)</string>
+    <string name="city_text">Ville</string>
+    <string name="country_text">Pays</string>
+    <string name="postal_code_text">Code Postal</string>
+    
+    <!-- Chaînes pour l'activité de login -->
+    <string name="app_logo_description">Logo de l\'application</string>
+    <string name="app_name_login_page">La boutique a cocaine</string>
+    <string name="welcome_text">Bienvenue !</string>
+    <string name="connect_to_buy_items">Connectez-vous pour effectuer des achats</string>
+    <string name="connect_with_masi_id">Se connecter avec MASI-ID</string>
+    <string name="need_help_contact_us">Besoin d\'aide ? Contactez-nous</string>
+
+
+    <string name="toast_no_products_found">Aucun produit trouvé</string>
+    <string name="toast_max_stock_reached">Stock max atteint (%1$s)</string>
+    <string name="singleorder_quantiy">Qté: %1$s</string>
+    <string name="toast_empty_cart">Votre panier est vide.</string>
+    <string name="toast_product_added_to_cart">%1$s ajouté au panier</string>
+
+    <!-- Chaînes pour le détail d'un produit -->
+    <string name="product_name">Nom du produit</string>
+    <string name="product_description">Description du produit</string>
+    <string name="product_detail_price">Prix : %1$s €</string>
+    <string name="button_back">Retour</string>
+
+    <string name="product_image_description">Image du produit</string>
+    <string name="add_to_cart">Ajouter au panier</string>
+    <string name="description_title">Description</string>
+    <string name="product_rating">Note du produit</string>
+
+    <string name="in_development">Cette fonctionnalité est en cours de développement</string>
+
+    <string name="error_image">Image d\'erreur</string>
+    <string name="error_loading_products">Impossible de charger les produits</string>
+    <string name="error_fetch_try_again">Une erreur est survenue lors du chargement des produits. Veuillez vérifier votre connexion et réessayer.</string>
+    <string name="retry">Réessayer</string>
+
+
+    <string name="google_api_key">AIzaSyDjXhpvF9CbRi_tZFf3xgBQA5rGX5WbiyA</string>
+
+
+</resources>

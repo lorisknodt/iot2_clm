@@ -14,22 +14,23 @@ import retrofit2.Response
 class OrderRepository{
 
     // Fonction pour créer la commande
-    fun createOrder(orderRequest: OrderRequest, callback: (Boolean, String) -> Unit) {
+    fun createOrder(orderRequest: OrderRequest, callback: (Boolean, String, Long?) -> Unit) {
         RetrofitInstance.api.createOrder(orderRequest)
             .enqueue(object : Callback<OrderResponse> {
                 override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
                     if (response.isSuccessful) {
+                        val responseBody = response.body()
                         // La commande a été créée avec succès
-                        callback(true, "Commande créée avec succès")
+                        callback(true, "Commande créée avec succès: ${responseBody?.id}", responseBody?.id)
                     } else {
                         // Si la réponse est une erreur
-                        callback(false, "Erreur lors de la création de la commande")
+                        callback(false, "Erreur lors de la création de la commande", null)
                     }
                 }
 
                 override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
                     // Si la requête échoue (erreur réseau)
-                    callback(false, "Erreur réseau")
+                    callback(false, "Erreur réseau", null)
                 }
             })
     }

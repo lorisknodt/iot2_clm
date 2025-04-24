@@ -12,7 +12,6 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,14 +19,22 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.Category
 import com.example.clm_iot2.ui.category.CategoryViewModel
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class ProductsFragment : Fragment() {
 
     private val cartViewModel: CartViewModel by activityViewModels()
-    private val productViewModel: ProductViewModel by activityViewModels()  // Ajout du ViewModel des produits
+    private val productViewModel: ProductViewModel by activityViewModels()
     private val categoryViewModel: CategoryViewModel by activityViewModels()
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var errorLayout: ConstraintLayout
+    private lateinit var contentLayout: ConstraintLayout
+    private lateinit var retryButton: MaterialButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,20 +46,30 @@ class ProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewProduits)
-        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
-        val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
+        // Initialiser les vues
+        initViews(view)
+        // Configurer les listeners
+        setupListeners()
+        // Configurer les observateurs
+        setupObservers()
+        // Récupérer les données initiales
+        loadInitialData()
+    }
 
-        swipeRefreshLayout.setOnRefreshListener {
-            categoryViewModel.fetchProducts()
-        }
+    private fun initViews(view: View) {
+        recyclerView = view.findViewById(R.id.recyclerViewProduits)
+        progressBar = view.findViewById(R.id.progressBar)
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        errorLayout = view.findViewById(R.id.errorLayout)
+        contentLayout = view.findViewById(R.id.contentLayout)
+        retryButton = view.findViewById(R.id.retryButton)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val recyclerViewCategories = view.findViewById<RecyclerView>(R.id.recyclerViewCategories)
         recyclerViewCategories.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        // Observer pour les catégories (affichage de la liste des catégories)
+        // Observer pour les catégories
         lifecycleScope.launch {
             categoryViewModel.categories.collect { categories ->
                 val allCategory = Category(id = -1, name = "Tout", description = "Tous les produits")
@@ -60,40 +77,69 @@ class ProductsFragment : Fragment() {
 
                 recyclerViewCategories.adapter = CategoryAdapter(allCategories) { selectedCategory ->
                     if (selectedCategory.name == "Tout") {
-                        // Quand "Tout" est sélectionné, récupérer tous les produits
                         categoryViewModel.fetchProducts()
                     } else {
-                        // Sinon, récupérer les produits de la catégorie sélectionnée
                         categoryViewModel.fetchProductsByCategory(selectedCategory.name)
                     }
                 }
             }
         }
+    }
 
-        // Récupérer les catégories au lancement
-        categoryViewModel.fetchCategories()
+    private fun setupListeners() {
+        swipeRefreshLayout.setOnRefreshListener {
+            categoryViewModel.fetchProducts()
+        }
 
-        // Observer pour les produits
-        categoryViewModel.products.observe(viewLifecycleOwner) { produits ->
-            // Cacher la ProgressBar une fois les produits chargés
-            progressBar.visibility = View.GONE
-            swipeRefreshLayout.isRefreshing = false
+        retryButton.setOnClickListener {
+            errorLayout.visibility = View.GONE
+            contentLayout.visibility = View.VISIBLE
+            categoryViewModel.fetchProducts()
+        }
+    }
 
-            // Vérifier si la liste des produits est vide
-            if (produits.isNullOrEmpty()) {
-                Toast.makeText(context, "Aucun produit trouvé", Toast.LENGTH_SHORT).show()
+    private fun setupObservers() {
+        // Observer pour l'état de chargement
+        categoryViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        // Observer pour les erreurs de chargement des produits
+        categoryViewModel.productLoadError.observe(viewLifecycleOwner) { hasError ->
+            if (hasError) {
+                contentLayout.visibility = View.GONE
+                errorLayout.visibility = View.VISIBLE
+                swipeRefreshLayout.isRefreshing = false
             } else {
-                // Afficher les produits dans le RecyclerView
-                recyclerView.adapter = ProductAdapter(produits) { product ->
-                    cartViewModel.addProductToCart(product)
-                    Toast.makeText(context, "${product.nom} ajouté au panier", Toast.LENGTH_SHORT).show()
-                }
+                contentLayout.visibility = View.VISIBLE
+                errorLayout.visibility = View.GONE
             }
         }
 
-        // Affichage du loader pendant la récupération des données
-        progressBar.visibility = View.VISIBLE
+        // Observer pour les produits
+        categoryViewModel.products.observe(viewLifecycleOwner) { produits ->
+            // Terminer le rafraîchissement si actif
+            swipeRefreshLayout.isRefreshing = false
 
+            if (!produits.isNullOrEmpty()) {
+                // Afficher les produits dans le RecyclerView
+                recyclerView.adapter = ProductAdapter(produits) { product ->
+                    cartViewModel.addProductToCart(product)
+                    Toast.makeText(context,
+                        getString(R.string.toast_product_added_to_cart, product.name), Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                // Si productLoadError n'est pas déjà activé, montrer le toast
+                if (categoryViewModel.productLoadError.value != true) {
+                    Toast.makeText(context, getString(R.string.toast_no_products_found), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun loadInitialData() {
+        // Récupérer les catégories
+        categoryViewModel.fetchCategories()
         // Lancer la récupération des produits (par défaut : tous les produits)
         categoryViewModel.fetchProducts()
     }

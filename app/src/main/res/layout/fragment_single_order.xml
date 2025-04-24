@@ -45,7 +45,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Commande"
+                                android:text="@string/order_text"
                                 android:textSize="16sp"
                                 android:textColor="@color/secondary_text_color"/>
 
@@ -79,7 +79,7 @@
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Statut"
+                                    android:text="@string/status_text"
                                     android:textSize="14sp"
                                     android:textColor="@color/secondary_text_color"/>
 
@@ -101,7 +101,7 @@
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Date"
+                                    android:text="@string/date_text"
                                     android:textSize="14sp"
                                     android:textColor="@color/secondary_text_color"/>
 
@@ -130,7 +130,7 @@
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Adresse de livraison"
+                                android:text="@string/delivery_address"
                                 android:textSize="14sp"
                                 android:textColor="@color/secondary_text_color"/>
 
@@ -160,7 +160,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Total"
+                                android:text="@string/total_text"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/primary_text_color"/>
@@ -183,7 +183,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Articles commandés"
+                    android:text="@string/ordered_items"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@color/primary_text_color"/>
