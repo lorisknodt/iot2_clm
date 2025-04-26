@@ -144,7 +144,8 @@ class OrderConfirmationFragment : Fragment() {
                     country = country,
                     // Ajoutez ici les instructions de livraison en cas d'absence si votre API les prend en charge
                     // deliveryInstructions = absenceInstructions
-                )
+                ),
+                deliveryInstruction = orderConfViewModel.selectedDeliveryOption.toString()
             )
 
             // Affichage des produits dans les logs pour tester
@@ -164,9 +165,6 @@ class OrderConfirmationFragment : Fragment() {
                     // Vider le panier
                     cartViewModel.clearCart()
 
-                    // TODO :aller vers un écran de recapitulatif et remerciement
-                    // findNavController().navigate(R.id.action_to_orderSuccessFragment)
-
                     // Rediriger vers l'écran de paiement
                     val amount = cartItems.sumOf { it.price * it.quantity }
 
@@ -185,6 +183,7 @@ class OrderConfirmationFragment : Fragment() {
                 } else {
                     // Échec : on affiche le message d'erreur
                     Toast.makeText(requireContext(), "Erreur : $message", Toast.LENGTH_LONG).show()
+                    Log.d("OrderConfirmationFragment", "Voici l'erreur: $message")
                 }
             }
         }

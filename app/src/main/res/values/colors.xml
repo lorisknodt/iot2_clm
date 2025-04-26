@@ -12,10 +12,14 @@
     <color name="primary_light">#C5CAE9</color>
     <color name="accent">#FF4081</color>
 
+    <color name="green_success">#4CAF50</color>
+    <color name="red_error">#F44336</color>
+
 
     <color name="primary_color">#1976D2</color>
     <color name="primary_dark_color">#0D47A1</color>
     <color name="accent_color">#FF5722</color>
+    <color name="cancel_button_color">#E53935</color>
 
     <!-- Couleurs pour le texte -->
     <color name="primary_text_color">#212121</color>
@@ -50,10 +54,10 @@
     <color name="text_danger">#D32F2F</color>
     <color name="profile_placeholder_bg">#146EB4</color>
 
-
-
     <!-- Couleurs spécifiques au fragment de detail d'un produit -->
     <color name="background">#F5F5F5</color>
     <color name="divider">#E0E0E0</color>
     <color name="price_background">#4CAF50</color>
+
+
 </resources>

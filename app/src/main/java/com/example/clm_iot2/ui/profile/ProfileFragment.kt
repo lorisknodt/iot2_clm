@@ -23,6 +23,8 @@ import com.google.android.material.navigation.NavigationView
 
 import android.content.Intent
 import com.example.clm_iot2.LoginActivity
+import com.example.clm_iot2.security.TokenManager
+import com.example.clm_iot2.singleton.CurrentUser
 
 class ProfileFragment : Fragment() {
 
@@ -83,7 +85,12 @@ class ProfileFragment : Fragment() {
             // Déconnexion de l'utilisateur
             viewModel.logout()
             Toast.makeText(context, "Déconnexion...", Toast.LENGTH_SHORT).show()
-            // Naviguer vers l'écran de connexion après déconnexion
+
+            // Nettoyage currentUser et du token
+            CurrentUser.logout()  // Vide le CurrentUser
+            TokenManager.clearToken()  // Vide le Token
+
+            Toast.makeText(context, "Déconnexion...", Toast.LENGTH_SHORT).show()
 
             // Naviguer vers l'écran de connexion après déconnexion
             val intent = Intent(requireActivity(), LoginActivity::class.java)

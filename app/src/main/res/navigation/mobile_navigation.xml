@@ -92,7 +92,28 @@
     <fragment
             android:id="@+id/paymentFragment"
             android:name="com.example.clm_iot2.ui.payment.PaymentFragment"
+            android:label="@string/menu_order_confirmation">
+        <action
+                android:id="@+id/action_paymentFragment_to_paymentSuccessFragment"
+                app:destination="@id/paymentSuccessFragment" />
+
+        <action
+                android:id="@+id/action_paymentFragment_to_paymentFailedFragment"
+                app:destination="@id/paymentFailedFragment" />
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/paymentSuccessFragment"
+            android:name="com.example.clm_iot2.ui.payment.PaymentSuccessFragment"
             android:label="@string/menu_order_confirmation" />
+
+    <fragment
+            android:id="@+id/paymentFailedFragment"
+            android:name="com.example.clm_iot2.ui.payment.PaymentFailedFragment"
+            android:label="@string/menu_order_confirmation" />
+
+
 
 
 </navigation>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -15,39 +16,54 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.example.clm_iot2.databinding.ActivityMainBinding
+import com.example.clm_iot2.security.TokenManager
+import com.example.clm_iot2.singleton.CurrentUser
 import com.google.android.libraries.places.api.Places
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var userName: TextView
+    private lateinit var userEmail: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // 1️⃣ INITIALISER LE BINDING EN PREMIER
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 2️⃣ Ensuite, tu peux utiliser les vues
         setSupportActionBar(binding.appBarMain.toolbar)
 
+        val navView = binding.navView
+        val headerView = navView.getHeaderView(0)
+
+        val userNameTextView = headerView.findViewById<TextView>(R.id.userNameTextView)
+        val userEmailTextView = headerView.findViewById<TextView>(R.id.userEmailTextView)
+
+        userNameTextView.text = CurrentUser.getUser()?.name ?: "Nom par défaut"
+        userEmailTextView.text = CurrentUser.getUser()?.email ?: "Email par défaut"
+
+        // 3️⃣ Initialisation Places
         Places.initialize(applicationContext, "AIzaSyDjXhpvF9CbRi_tZFf3xgBQA5rGX5WbiyA")
 
-        /* binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        } */
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_products, R.id.nav_cart, R.id.nav_orders, R.id.nav_profile, R.id.nav_tracking), drawerLayout)
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.nav_products, R.id.nav_cart, R.id.nav_orders, R.id.nav_profile, R.id.nav_tracking),
+            drawerLayout
+        )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // 4️⃣ Gestion du deep link
         handleDeepLink(intent)
     }
+
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)

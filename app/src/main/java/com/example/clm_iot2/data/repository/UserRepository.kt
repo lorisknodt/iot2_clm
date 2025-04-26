@@ -5,10 +5,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class UserRepository {
+    val apiService = RetrofitInstance.getApi()
 
     suspend fun getUserProfile(userId: Int): User {
         return withContext(Dispatchers.IO) {
-            RetrofitInstance.api.getUserDetails(userId)
+            apiService.getUserDetails(userId)
+        }
+    }
+
+    suspend fun getCurrentUserProfile(): User {
+        return withContext(Dispatchers.IO) {
+            apiService.getCurrentUserDetails()
         }
     }
 

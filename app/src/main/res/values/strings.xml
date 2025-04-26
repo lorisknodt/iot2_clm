@@ -113,5 +113,37 @@
     <string name="error_fetch_try_again">An error occurred while loading products. Please check your connection and try again.</string>
     <string name="retry">Retry</string>
 
+
+    <!-- Strings for the payment success layout -->
+    <string name="success_icon_description">Success icon</string>
+    <string name="payment_success_title">Payment successful!</string>
+    <string name="payment_success_message">Thank you for your purchase. Your order has been confirmed and will be processed shortly.</string>
+    <string name="order_number_placeholder">Order number: #12345</string>
+    <string name="order_number_format">Order number: #%s</string>
+    <string name="continue_shopping">Continue shopping</string>
+    <string name="view_order">View my order</string>
+
+    <!-- Strings for the payment failure layout -->
+    <string name="failed_icon_description">Failure icon</string>
+    <string name="payment_failed_title">Payment failed</string>
+    <string name="payment_failed_message">Sorry, your payment could not be processed. Please try again later or use another payment method.</string>
+    <string name="error_code_placeholder">Error code: ERR-1234</string>
+    <string name="error_code_format">Error code: %s</string>
+    <string name="try_again">Try again</string>
+    <string name="contact_support">Contact support</string>
+
+
+    <string name="cancel_order">Annuler la commande</string>
+    <string name="cancel_confirmation_title">Annuler la commande</string>
+    <string name="cancel_confirmation_message">Êtes-vous sûr de vouloir annuler cette commande ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
+
     <string name="google_api_key">AIzaSyDjXhpvF9CbRi_tZFf3xgBQA5rGX5WbiyA</string>
+    <string name="password_text">Mot de passe</string>
+    <string name="password_forgot_text">Mot de passe oublié ?</string>
+    <string name="connect_text">Connexion</string>
+    <string name="register_text">S\'inscrire</string>
+    <string name="or_text">OU</string>
 </resources>

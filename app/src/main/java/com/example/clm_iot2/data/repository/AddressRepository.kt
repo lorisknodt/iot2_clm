@@ -4,9 +4,10 @@ import RetrofitInstance
 import com.example.clm_iot2.model.Address
 
 class AddressRepository {
+    val apiService = RetrofitInstance.getApi()
     suspend fun getAddresses(clientId: Int): Result<List<Address>> {
         return try {
-            val addresses = RetrofitInstance.api.getAddresses(clientId)
+            val addresses = apiService.getAddressesByClient()
             Result.success(addresses)
         } catch (e: Exception) {
             Result.failure(e)

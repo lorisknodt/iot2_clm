@@ -5,12 +5,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProductRepository {
+    val apiService = RetrofitInstance.getApi()
 
     // Fonction suspendue pour récupérer les produits
     suspend fun getProducts(): List<Product>? {
         return try {
             // Appel de l'API avec Retrofit (fonction suspendue)
-            RetrofitInstance.api.getProducts()
+            apiService.getProducts()
         } catch (e: Exception) {
             // En cas d'erreur, retourne null
             null
@@ -19,7 +20,7 @@ class ProductRepository {
 
     suspend fun getProductsByCategory(category: String): List<Product> {
         return try {
-            RetrofitInstance.api.getProductsByCategory(category)
+            apiService.getProductsByCategory(category)
         } catch (e: Exception) {
             // En cas d'erreur, retourne une liste vide
             emptyList() // Fonction Kotlin qui retourne une liste vide
@@ -28,7 +29,7 @@ class ProductRepository {
 
     fun getProductsByIds(productIds: List<Int>, callback: (Result<List<OrderProduct>>) -> Unit) {
         // Appel asynchrone avec Retrofit
-        val call = RetrofitInstance.api.getProductsByIDs(productIds)
+        val call = apiService.getProductsByIDs(productIds)
 
         call.enqueue(object : Callback<List<OrderProduct>> {
             override fun onResponse(

@@ -1,7 +1,7 @@
 package com.example.clm_iot2.model
 
 data class User(
-    val id: Int,
+    var id: String,
     val name: String,
     val email: String,
     val phone: String,

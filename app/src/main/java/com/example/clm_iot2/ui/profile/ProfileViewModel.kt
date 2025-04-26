@@ -21,7 +21,7 @@ class ProfileViewModel : ViewModel() {
     fun loadUserProfile(userId: Int = 8) {
         viewModelScope.launch {
             try {
-                val user = userRepository.getUserProfile(userId)
+                val user = userRepository.getCurrentUserProfile()
                 _userProfile.value = user
             } catch (e: Exception) {
                 _errorMessage.value = "Erreur lors du chargement du profil: ${e.message}"

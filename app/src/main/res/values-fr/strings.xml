@@ -112,8 +112,39 @@
     <string name="error_fetch_try_again">Une erreur est survenue lors du chargement des produits. Veuillez vérifier votre connexion et réessayer.</string>
     <string name="retry">Réessayer</string>
 
+    <!-- Strings pour le layout de succès de paiement -->
+    <string name="success_icon_description">Icône de succès</string>
+    <string name="payment_success_title">Paiement réussi !</string>
+    <string name="payment_success_message">Merci pour votre achat. Votre commande a été confirmée et sera traitée sous peu.</string>
+    <string name="order_number_placeholder">N° de commande: #12345</string>
+    <string name="order_number_format">N° de commande: #%s</string>
+    <string name="continue_shopping">Continuer vos achats</string>
+    <string name="view_order">Voir ma commande</string>
+
+    <!-- Strings pour le layout d'échec de paiement -->
+    <string name="failed_icon_description">Icône d\'échec</string>
+    <string name="payment_failed_title">Paiement échoué</string>
+    <string name="payment_failed_message">Désolé, votre paiement n\'a pas pu être traité. Veuillez réessayer plus tard ou utiliser une autre méthode de paiement.</string>
+    <string name="error_code_placeholder">Code erreur: ERR-1234</string>
+    <string name="error_code_format">Code erreur: %s</string>
+    <string name="try_again">Réessayer</string>
+    <string name="contact_support">Contacter le support</string>
+
+
+    <string name="cancel_order">Annuler la commande</string>
+    <string name="cancel_confirmation_title">Annuler la commande</string>
+    <string name="cancel_confirmation_message">Êtes-vous sûr de vouloir annuler cette commande ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
 
     <string name="google_api_key">AIzaSyDjXhpvF9CbRi_tZFf3xgBQA5rGX5WbiyA</string>
+    <string name="password_text">Mot de passe</string>
+
+    <string name="password_forgot_text">Mot de passe oublié ?</string>
+    <string name="connect_text">Connexion</string>
+    <string name="register_text">S\'inscrire</string>
+    <string name="or_text">OU</string>
 
 
 </resources>

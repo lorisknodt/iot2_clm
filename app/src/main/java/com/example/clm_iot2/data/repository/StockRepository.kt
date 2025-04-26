@@ -3,10 +3,11 @@ package com.example.clm_iot2.data.repository;
 import RetrofitInstance
 
 class StockRepository {
+    val apiService = RetrofitInstance.getApi()
 
     suspend fun getAvailableStock(productId: Int): Int {
         return try {
-            val stock = RetrofitInstance.api.getStockByProductId(productId)
+            val stock = apiService.getStockByProductId(productId)
             stock.quantity
         } catch (e: Exception) {
             e.printStackTrace()

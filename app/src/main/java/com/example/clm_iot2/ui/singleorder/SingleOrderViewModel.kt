@@ -24,6 +24,11 @@ class SingleOrderViewModel(
     private val _productDetails = MutableLiveData<Result<List<OrderProduct>>>()
     val productDetails: LiveData<Result<List<OrderProduct>>> get() = _productDetails
 
+    // LiveData pour le statut de l'annulation de commande
+    private val _cancelOrderStatus = MutableLiveData<Result<Boolean>>()
+    val cancelOrderStatus: LiveData<Result<Boolean>> get() = _cancelOrderStatus
+
+
     // Fonction pour récupérer les détails d'une commande spécifique
     fun getOrderDetails(orderId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -40,5 +45,19 @@ class SingleOrderViewModel(
         }
     }
 
+    // Fonction pour annuler une commande
+    fun cancelOrder(orderId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            orderRepository.updateOrderStatus(orderId.toLong(), "cancelled") { success, message ->
+                if (success) {
+                    _cancelOrderStatus.postValue(Result.success(true))
+                    // Mettre à jour les détails de la commande pour refléter le nouveau statut
+                    getOrderDetails(orderId)
+                } else {
+                    _cancelOrderStatus.postValue(Result.failure(Exception(message)))
+                }
+            }
+        }
+    }
 
 }
