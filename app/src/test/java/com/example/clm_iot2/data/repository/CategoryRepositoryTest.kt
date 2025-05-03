@@ -1,8 +1,8 @@
 package com.example.clm_iot2.data.repository
 
+import RetrofitInstance
+import ApiService
 import com.example.clm_iot2.model.Category
-import com.example.clm_iot2.data.network.ApiService
-import com.example.clm_iot2.data.network.RetrofitInstance
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -11,10 +11,10 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.example.clm_iot2.data.remote.ApiService
 import com.google.gson.Gson
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import java.lang.reflect.Field
 
 class CategoryRepositoryTest {
 
@@ -37,7 +37,12 @@ class CategoryRepositoryTest {
         // Création de l'instance de l'ApiService
         apiService = retrofit.create(ApiService::class.java)
 
-        // Initialisation du repository avec l'ApiService mocké
+        // Modification temporaire de RetrofitInstance.api pour utiliser le mock
+        val apiField: Field = RetrofitInstance::class.java.getDeclaredField("api")
+        apiField.isAccessible = true
+        apiField.set(RetrofitInstance, apiService)
+
+        // Initialisation du repository
         categoryRepository = CategoryRepository()
     }
 
@@ -59,26 +64,15 @@ class CategoryRepositoryTest {
             .setBody(Gson().toJson(mockCategories))
         mockWebServer.enqueue(mockResponse)
 
-        // Création d'une instance temporaire de RetrofitInstance pour le test
-        val originalApi = RetrofitInstance.api
-        val retrofitField = RetrofitInstance::class.java.getDeclaredField("api")
-        retrofitField.isAccessible = true
-        retrofitField.set(RetrofitInstance, apiService)
+        // Appel de la méthode à tester
+        val result = categoryRepository.getCategories()
 
-        try {
-            // Appel de la méthode à tester
-            val result = categoryRepository.getCategories()
-
-            // Vérifications
-            assertTrue(result.isSuccess)
-            val categories = result.getOrNull()
-            assertEquals(2, categories?.size)
-            assertEquals("Electronics", categories?.get(0)?.name)
-            assertEquals("Clothing", categories?.get(1)?.name)
-        } finally {
-            // Restauration de l'ApiService original
-            retrofitField.set(RetrofitInstance, originalApi)
-        }
+        // Vérifications
+        assertTrue(result.isSuccess)
+        val categories = result.getOrNull()
+        assertEquals(2, categories?.size)
+        assertEquals("Electronics", categories?.get(0)?.name)
+        assertEquals("Clothing", categories?.get(1)?.name)
     }
 
     @Test
@@ -89,22 +83,11 @@ class CategoryRepositoryTest {
             .setBody("Server error")
         mockWebServer.enqueue(mockResponse)
 
-        // Création d'une instance temporaire de RetrofitInstance pour le test
-        val originalApi = RetrofitInstance.api
-        val retrofitField = RetrofitInstance::class.java.getDeclaredField("api")
-        retrofitField.isAccessible = true
-        retrofitField.set(RetrofitInstance, apiService)
+        // Appel de la méthode à tester
+        val result = categoryRepository.getCategories()
 
-        try {
-            // Appel de la méthode à tester
-            val result = categoryRepository.getCategories()
-
-            // Vérifications
-            assertTrue(result.isFailure)
-            assertTrue(result.exceptionOrNull() != null)
-        } finally {
-            // Restauration de l'ApiService original
-            retrofitField.set(RetrofitInstance, originalApi)
-        }
+        // Vérifications
+        assertTrue(result.isFailure)
+        assertTrue(result.exceptionOrNull() != null)
     }
 }
