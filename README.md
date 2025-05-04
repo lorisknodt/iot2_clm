@@ -50,10 +50,20 @@ Affichage des produits ajoutés au panier avec :
 - Idem que la page commande
 - Les produits de la commande
 
-
 ### Rafraichissement dynamique 
 - Pour la page Produits
 - Pour la page Commandes
+
+### Paiement de la commande
+- Redirection sur une page web pour insérer les informations bancaires
+- Attente de la réponse de la page web pour l'affichage dédié
+
+### Gestion du profil utilisateur
+Cette page permet d'accéder à différentes actions :
+- **Historique des commandes** : Redirige l'utilisateur vers la page contenant toutes ses commandes passées.
+- **Paramètres du compte** : Redirige l'utilisateur vers une page de développement pour les futures fonctionnalités de modification du profil.
+- **Déconnexion** : Vide le cache local (où est stocké le token d'authentification), met à jour le `currentUser` à `null` et redirige vers l'écran de connexion.
+
 
 ## 🧩 Architecture du projet
 
@@ -109,4 +119,12 @@ app/
 3. Compiler et exécuter le projet sur un émulateur ou un appareil physique.
 
 ## 📚 Prochaines étapes
-- 
+
+- Finaliser le fragment `PaymentFailure` en configurant correctement le bouton "Réessayer".
+- Implémenter la modification du profil utilisateur (adresse de facturation, numéro de téléphone, etc.).
+- Ajouter un système de service après-vente (SAV) permettant aux utilisateurs de laisser des commentaires et des notes sur les produits.
+- Supporter d'autres méthodes d'authentification (SMS, Masi-id).
+- Améliorer la gestion du panier, notamment lorsqu'on ferme et rouvre l'application.
+- Ajouter des services Android pour mieux gérer certains appels API en arrière-plan (ex. actualisation silencieuse des commandes).
+
+
