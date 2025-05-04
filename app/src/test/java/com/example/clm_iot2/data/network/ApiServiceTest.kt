@@ -6,9 +6,9 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,7 +17,7 @@ class ApiServiceTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var apiService: ApiService
 
-    @Before
+    @BeforeEach
     fun setup() {
         mockWebServer = MockWebServer()
         mockWebServer.start()
@@ -29,7 +29,7 @@ class ApiServiceTest {
             .create(ApiService::class.java)
     }
 
-    @After
+    @AfterEach
     fun teardown() {
         mockWebServer.shutdown()
     }

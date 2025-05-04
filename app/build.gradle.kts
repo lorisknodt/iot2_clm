@@ -69,8 +69,10 @@ dependencies {
     testImplementation("org.mockito:mockito-core:5.0.0")
     testImplementation("org.mockito:mockito-inline:5.0.0")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation("org.jetbrains.kotlin:kotlin-reflect:1.9.22")
+    
 
     // Pour MockK
     testImplementation("io.mockk:mockk:1.12.0")
@@ -81,3 +83,4 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
