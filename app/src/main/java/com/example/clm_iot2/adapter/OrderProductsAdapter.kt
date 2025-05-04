@@ -54,8 +54,6 @@ class OrderProductsAdapter(private val products: List<OrderProduct>) :
             // Utiliser Glide pour charger l'image
             Glide.with(itemView.context)
                 .load(glideUrl)
-                //.placeholder(R.drawable.placeholder_image) // facultatif : image de chargement
-                //.error(R.drawable.error_image)             // facultatif : image d'erreur
                 .into(productImage)
         }
     }

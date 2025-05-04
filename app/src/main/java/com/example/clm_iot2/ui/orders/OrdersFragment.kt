@@ -41,11 +41,8 @@ class OrdersFragment : Fragment() {
 
         val exploreButton = view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnExploreProducts)
         exploreButton.setOnClickListener {
-            // Exemple d'action : naviguer vers un autre fragment
+            // Quand le client n'as aucune commande effectuée
             findNavController().navigate(R.id.action_orderFragment_to_productsFragment)
-
-            // Ou simplement afficher un message temporaire pour tester
-            // Toast.makeText(requireContext(), "Explorer les données cliqué", Toast.LENGTH_SHORT).show()
         }
 
 

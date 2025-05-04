@@ -30,11 +30,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 1️⃣ INITIALISER LE BINDING EN PREMIER
+        // INITIALISER LE BINDING EN PREMIER
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 2️⃣ Ensuite, tu peux utiliser les vues
+        // Ensuite, tu peux utiliser les vues
         setSupportActionBar(binding.appBarMain.toolbar)
 
         val navView = binding.navView
@@ -46,8 +46,9 @@ class MainActivity : AppCompatActivity() {
         userNameTextView.text = CurrentUser.getUser()?.name ?: "Nom par défaut"
         userEmailTextView.text = CurrentUser.getUser()?.email ?: "Email par défaut"
 
-        // 3️⃣ Initialisation Places
-        Places.initialize(applicationContext, "AIzaSyDjXhpvF9CbRi_tZFf3xgBQA5rGX5WbiyA")
+        // Initialisation Places
+        // Inutilisé (c'était pour autocompléter l'insertion d'une adresse)
+        // Places.initialize(applicationContext, "AIzaSyDjXhpvF9CbRi_tZFf3xgBQA5rGX5WbiyA")
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -60,19 +61,15 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        // 4️⃣ Gestion du deep link
-        handleDeepLink(intent)
     }
 
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         setIntent(intent)
-        handleDeepLink(intent) // Appelle ici aussi, au cas où l'app est déjà ouverte
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
@@ -80,29 +77,5 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    private fun handleDeepLink(intent: Intent?) {
-        intent?.data?.let { uri ->
-            if (uri.host == "payment-result") {
-                val status = uri.getQueryParameter("status") // "success" ou "failure"
-                val orderId = uri.getQueryParameter("orderId")?.toLongOrNull()
-
-                if (status != null && orderId != null) {
-                    val navController = findNavController(R.id.paymentFragment)
-                    val bundle = bundleOf("status" to status, "orderId" to orderId)
-
-                    if (status == "success") {
-                        //navController.navigate(R.id.action_global_paymentSuccessFragment, bundle)
-
-                        Log.d("MainActivity", "Succes du payement")
-                    } else {
-                        //navController.navigate(R.id.action_global_paymentFailureFragment, bundle)
-
-                        Log.d("MainActivity", "Failure du payement")
-                    }
-                }
-            }
-        }
     }
 }

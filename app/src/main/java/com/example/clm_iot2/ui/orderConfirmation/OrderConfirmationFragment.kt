@@ -19,6 +19,7 @@ import com.example.clm_iot2.model.NewAddress
 import com.example.clm_iot2.model.OrderItem
 import com.example.clm_iot2.model.OrderRequest
 import com.example.clm_iot2.repository.OrderRepository
+import com.example.clm_iot2.singleton.CurrentUser
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.android.material.textfield.TextInputEditText
@@ -133,7 +134,6 @@ class OrderConfirmationFragment : Fragment() {
             Log.d("OrderConfirmation", "Instructions en cas d'absence: $absenceInstructions")
 
             // Création de l'objet OrderRequest avec les données dynamiques du panier
-
             val customOption: String
             if(orderConfViewModel.selectedDeliveryOption.value.toString() == OrderConfirmationViewModel.OPTION_OTHER){
                 val customDeliveryOption = orderConfViewModel.customDeliveryOption.value.toString()
@@ -237,7 +237,7 @@ class OrderConfirmationFragment : Fragment() {
         addressLoadingProgressBar.visibility = View.VISIBLE
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val addressList = orderConfViewModel.fetchAddresses(1) // TODO Remplacer par l'ID réel du client quand on aura le token
+            val addressList = orderConfViewModel.fetchAddresses(CurrentUser.getUser()!!.id) // TODO Remplacer par l'ID réel du client quand on aura le token
 
             val addressMap = addressList.associateBy { formatAddress(it) }
             val formattedList = addressMap.keys.toList()

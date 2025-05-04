@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                     loadingCard.visibility = View.VISIBLE
                     mainContent.visibility = View.GONE
                 }
-                loadCurrentUser() // try/catch est maintenant dans la fonction
+                loadCurrentUser()
             }
         }
 

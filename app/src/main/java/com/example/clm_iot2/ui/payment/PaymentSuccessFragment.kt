@@ -37,16 +37,6 @@ class PaymentSuccessFragment : Fragment() {
             tvOrderNumber.text = getString(R.string.order_number_format, it.toString())
         }
 
-        // Configurer le numéro de commande (option si vous passez des arguments)
-        // Si vous n'avez pas besoin d'arguments, vous pouvez juste garder le texte par défaut dans le XML
-        try {
-            // Si vous avez des arguments (facultatif)
-            // val args = arguments
-            // val orderNumber = args?.getString("orderNumber", "00000")
-            // tvOrderNumber.text = getString(R.string.order_number_format, orderNumber)
-        } catch (e: Exception) {
-            // Conserver le texte par défaut du XML
-        }
 
         // Configurer les boutons
         btnContinueShopping.setOnClickListener {

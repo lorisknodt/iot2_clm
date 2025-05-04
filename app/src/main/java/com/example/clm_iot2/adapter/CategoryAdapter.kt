@@ -39,7 +39,7 @@ class CategoryAdapter(
         val category = categories[position]
         holder.categoryName.text = category.name
 
-        // Optionnel : Ajouter un style pour montrer la sélection
+        // Amélioration : Ajouter un style pour montrer la sélection
         holder.itemView.isSelected = (selectedPosition == position)
     }
 

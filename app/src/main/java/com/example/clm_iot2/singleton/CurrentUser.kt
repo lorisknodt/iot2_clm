@@ -15,9 +15,6 @@ object CurrentUser {
         return user
     }
 
-    fun getClientId(): String? {
-        return clientId
-    }
 
     fun login(id: String) {
         clientId = id
@@ -26,9 +23,5 @@ object CurrentUser {
     fun logout() {
         user = null
         clientId = null
-    }
-
-    fun isLoggedIn(): Boolean {
-        return clientId != null
     }
 }

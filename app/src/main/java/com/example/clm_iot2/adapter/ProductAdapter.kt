@@ -49,8 +49,6 @@ class ProductAdapter(
         // Utiliser Glide pour charger l'image
         Glide.with(holder.itemView.context)
             .load(glideUrl)
-            //.placeholder(R.drawable.placeholder_image) // facultatif : image de chargement
-            //.error(R.drawable.error_image)             // facultatif : image d'erreur
             .into(holder.iconeProduit)
 
         holder.nomProduit.text = produit.name
@@ -63,7 +61,7 @@ class ProductAdapter(
                 putString("name", produit.name)
                 putString("description", produit.description)
                 putDouble("price", produit.price)
-                putString("imageUrl", produit.imageUrl) // important si tu veux afficher aussi l'image dans la fiche produit
+                putString("imageUrl", produit.imageUrl)
                 putInt("stock", produit.stock)
             }
 
@@ -77,12 +75,6 @@ class ProductAdapter(
             val produitAvecQuantite = produit.copy(quantity = 1)
             onProductAdded(produitAvecQuantite)
         }
-    }
-
-
-    fun updateData(newProduits: List<Product>) {
-        products = newProduits
-        notifyDataSetChanged()
     }
 
     override fun getItemCount() = products.size

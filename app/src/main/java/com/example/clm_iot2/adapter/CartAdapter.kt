@@ -42,8 +42,6 @@ class CartAdapter(
         // Utiliser Glide pour charger l'image
         Glide.with(holder.itemView.context)
             .load(glideUrl)
-            //.placeholder(R.drawable.placeholder_image) // facultatif : image de chargement
-            //.error(R.drawable.error_image)             // facultatif : image d'erreur
             .into(holder.iconResId)
 
         //holder.iconResId.setImageResource(R.drawable.ic_television) //de base product.iconeResId faudra changer si on gère les icones
