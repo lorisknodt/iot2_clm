@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.sonarqube") version "5.0.0.4638" // Ajout explicite du plugin SonarQube
-    id("jacoco")
 }
 
 android {
@@ -71,6 +70,7 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:5.0.0")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("com.google.truth:truth:1.1.3")
 
     // Pour MockK
     testImplementation("io.mockk:mockk:1.12.0")
@@ -80,26 +80,4 @@ dependencies {
 // Configuration pour exécuter les tests JUnit 5
 tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-jacoco {
-    toolVersion = "0.8.10"
-}
-
-tasks.register<JacocoReport>("jacocoTestReport") {
-    dependsOn(tasks.named("test"))  // Utiliser "tasks.named" au lieu de "tasks.test"
-
-    reports {
-        xml.required.set(true)  // Nécessaire pour SonarQube
-        html.required.set(true)
-    }
-
-    classDirectories.setFrom(fileTree("build/intermediates/javac/debug") {
-        exclude("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
-    })
-
-    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
-    executionData.setFrom(fileTree("build") {
-        include("jacoco/test.exec")
-    })
 }
