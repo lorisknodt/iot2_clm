@@ -3,11 +3,11 @@ name: IOT2_CLM - Run Tests
 on:
   push:
     branches:
-      - main
+      - master
       - Test
   pull_request:
     branches:
-      - main
+      - master
       - Test
 
 jobs:
