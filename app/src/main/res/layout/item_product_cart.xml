@@ -16,16 +16,20 @@
             android:padding="12dp">
 
         <!-- Image du produit avec coins arrondis -->
-        <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/iconeProduitCart"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/description_image_produit"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+        <ImageView
+            android:id="@+id/iconeProductCart"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_image_produit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"/>
+
 
         <!-- Nom du produit -->
         <TextView
@@ -37,7 +41,7 @@
                 android:textSize="16sp"
                 android:maxLines="2"
                 android:ellipsize="end"
-                app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
+                app:layout_constraintStart_toEndOf="@id/iconeProductCart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:fontFamily="sans-serif-medium" />
@@ -52,7 +56,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/design_default_color_primary"
                 android:fontFamily="sans-serif-medium"
-                app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
+                app:layout_constraintStart_toEndOf="@id/iconeProductCart"
                 app:layout_constraintTop_toBottomOf="@id/nomProduitCart" />
 
         <!-- Container pour les contrôles du bas -->
@@ -61,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
-                app:layout_constraintStart_toEndOf="@id/iconeProduitCart"
+                app:layout_constraintStart_toEndOf="@id/iconeProductCart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/prixProduitCart"
                 app:layout_constraintBottom_toBottomOf="parent">

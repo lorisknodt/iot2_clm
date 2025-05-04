@@ -75,7 +75,7 @@ class OrderRepository{
             })
     }
 
-    fun deleteOrder(orderId: Long, callback: (success: Boolean, message: String) -> Unit) {
+    fun deleteOrder(orderId: Int, callback: (success: Boolean, message: String) -> Unit) {
         apiService.deleteOrder(orderId)
             .enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {

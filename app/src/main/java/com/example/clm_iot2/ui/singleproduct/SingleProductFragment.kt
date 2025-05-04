@@ -11,8 +11,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.Product
+import com.example.clm_iot2.security.TokenManager
+import com.example.clm_iot2.singleton.CurrentUser
 
 class SingleProductFragment : Fragment() {
 
@@ -35,32 +40,50 @@ class SingleProductFragment : Fragment() {
         val productName = arguments?.getString("name") ?: "Nom inconnu"
         val productDescription = arguments?.getString("description") ?: "Description indisponible"
         val productPrice = arguments?.getDouble("price") ?: 0.0
-        val productImageResId = arguments?.getInt("imageResId")
         val productStock = arguments?.getInt("stock")
+        val productImageUrl = arguments?.getString("imageUrl")
 
-        // Affichage des données dans les vues
-        view.findViewById<TextView>(R.id.productName).text = productName
-        view.findViewById<TextView>(R.id.productDescription).text = productDescription
-        view.findViewById<TextView>(R.id.productPrice).text = getString(R.string.product_detail_price, productPrice.toString())
+        // Références vers les vues
+        val productNameTextView = view.findViewById<TextView>(R.id.productName)
+        val productDescriptionTextView = view.findViewById<TextView>(R.id.productDescription)
+        val productPriceTextView = view.findViewById<TextView>(R.id.productPrice)
+        val productImageView = view.findViewById<ImageView>(R.id.productImage)
 
-        productImageResId?.let {
-            view.findViewById<ImageView>(R.id.productImage).setImageResource(it)
-        }
+        // Affichage du texte
+        productNameTextView.text = productName
+        productDescriptionTextView.text = productDescription
+        productPriceTextView.text = getString(R.string.product_detail_price, productPrice.toString())
+
+        // Chargement de l'image avec Glide
+        val baseUrl = "https://apiserver-bsdfh4gmduh8bsep.francecentral-01.azurewebsites.net"
+        val fullImageUrl = baseUrl + (productImageUrl ?: "")
+
+        val glideUrl = GlideUrl(
+            fullImageUrl,
+            LazyHeaders.Builder()
+                .addHeader("Authorization", "Bearer ${TokenManager.getToken()}")
+                .build()
+        )
+
+        Glide.with(this)
+            .load(glideUrl)
+            .error(R.drawable.ic_television)             // Image si erreur
+            .into(productImageView)
 
         // Gestion du bouton ajouter
         view.findViewById<Button>(R.id.btnAddToCart).setOnClickListener {
             val product = Product(
-                id = productId?: 0,
+                id = productId ?: 0,
                 name = productName,
                 description = productDescription,
                 price = productPrice,
-                iconeResId = productImageResId ?: 0,
-                stock = productStock?: 0
+                stock = productStock ?: 0,
+                imageUrl = productImageUrl
             )
-            cartViewModel.addProductToCart(product) // Appel de ta fonction
+            cartViewModel.addProductToCart(product)
             Toast.makeText(context, "Produit ajouté au panier", Toast.LENGTH_SHORT).show()
-
         }
     }
+
 
 }

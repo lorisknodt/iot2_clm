@@ -17,6 +17,7 @@
     <string name="menu_product_detail">Product details</string>
     <string name="menu_order_detail">Order details</string>
     <string name="menu_order_confirmation">Order confirmation</string>
+    <string name="menu_developpement">Currently being developped</string>
 
     <string name="description_image_produit">Description</string>
     <string name="loading">Loading</string>
@@ -75,7 +76,7 @@
     <string name="saved_addresses_text">Saved addresses</string>
     <string name="choose_address">Choose an address</string>
     <string name="address_and_number">Address (Street and number)</string>
-    <string name="apartment_optional">Apartment, floor, etc. (optional)</string>
+    <string name="street_number">Number</string>
     <string name="city_text">City</string>
     <string name="country_text">Country</string>
     <string name="postal_code_text">Postal code</string>
@@ -121,7 +122,7 @@
     <string name="order_number_placeholder">Order number: #12345</string>
     <string name="order_number_format">Order number: #%s</string>
     <string name="continue_shopping">Continue shopping</string>
-    <string name="view_order">View my order</string>
+    <string name="view_order">View my orders</string>
 
     <!-- Strings for the payment failure layout -->
     <string name="failed_icon_description">Failure icon</string>
@@ -130,7 +131,7 @@
     <string name="error_code_placeholder">Error code: ERR-1234</string>
     <string name="error_code_format">Error code: %s</string>
     <string name="try_again">Try again</string>
-    <string name="contact_support">Contact support</string>
+    <string name="main_menu">Main menu</string>
 
 
     <string name="cancel_order">Annuler la commande</string>

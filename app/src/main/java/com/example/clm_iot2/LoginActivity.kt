@@ -17,7 +17,10 @@ import com.example.clm_iot2.singleton.CurrentUser
 import com.example.clm_iot2.ui.register.RegisterFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loadingCard : CardView
@@ -34,15 +37,16 @@ class LoginActivity : AppCompatActivity() {
         // Vérifier si un token valide existe
         val token = TokenManager.getToken()
         Log.d("LoginActivity", "Voici el token; $token")
-        // Si le token existe, rediriger directement vers la page principale
+
         if (!token.isNullOrEmpty()) {
-            loadingCard.visibility = View.VISIBLE
-            mainContent.visibility = View.GONE
-            loadCurrentUser()
+            lifecycleScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    loadingCard.visibility = View.VISIBLE
+                    mainContent.visibility = View.GONE
+                }
+                loadCurrentUser() // try/catch est maintenant dans la fonction
+            }
         }
-
-
-
 
         val emailEditText = findViewById<TextInputEditText>(R.id.et_username)
         val passwordEditText = findViewById<TextInputEditText>(R.id.et_password)
@@ -104,28 +108,40 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadCurrentUser() {
-        lifecycleScope.launch {
-            try {
-                // Récupérer les informations de l'utilisateur avec le token
-                val user = RetrofitInstance.getApi().getCurrentUserDetails()
-                Log.d("LoginActivity", "Voici le user: $user")
-                CurrentUser.setUser(user)
+    private suspend fun loadCurrentUser() {
+        try {
+            val user = RetrofitInstance.getApi().getCurrentUserDetails()
+            Log.d("LoginActivity", "Voici le user: $user")
+            CurrentUser.setUser(user)
 
-                // Après avoir mis à jour CurrentUser, on lance MainActivity
+            withContext(Dispatchers.Main) {
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-
                 loadingCard.visibility = View.GONE
-
                 finish()
-            } catch (e: Exception) {
-                Log.d("LoginActivity", "Erreur lors de la récupération de l'utilisateur: ${e.message}")
-                // Toast.makeText(this@LoginActivity, "Erreur lors de l'initialisation", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: HttpException) {
+            withContext(Dispatchers.Main) {
+                if (e.code() == 401) {
+                    Toast.makeText(this@LoginActivity, "Session expirée. Veuillez vous reconnecter.", Toast.LENGTH_SHORT).show()
+                    TokenManager.clearToken()
+                    mainContent.visibility = View.VISIBLE
+                    loadingCard.visibility = View.GONE
+                } else {
+                    Toast.makeText(this@LoginActivity, "Erreur serveur : ${e.code()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@LoginActivity, "Erreur inattendue : ${e.message}", Toast.LENGTH_SHORT).show()
+                mainContent.visibility = View.VISIBLE
+                loadingCard.visibility = View.GONE
             }
         }
     }
 
+
     private fun showRegisterFragment() {
+
         // Masquer les éléments de l'écran de connexion
         findViewById<CardView>(R.id.card_login).visibility = View.GONE
         findViewById<ImageView>(R.id.iv_app_logo).visibility = View.GONE
@@ -149,7 +165,7 @@ class LoginActivity : AppCompatActivity() {
             .addToBackStack("register_fragment")
             .commit()
     }
-    // Ajoutez cette méthode à votre LoginActivity
+
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             // Rétablir la visibilité des éléments de l'écran de connexion

@@ -2,7 +2,7 @@ package com.example.clm_iot2.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Product (
+data class Product(
     val id: Int,
 
     @SerializedName("name")
@@ -14,15 +14,14 @@ data class Product (
     @SerializedName("price")
     val price: Double,
 
-    // L'API ne fournit pas d'icône, donc garde cette propriété en tant qu'attribut local
-    val iconeResId: Int = 0,
-
     var quantity: Int = 1,
 
     var availableStock: Int = Int.MAX_VALUE,
 
     @SerializedName("stockId")
-    val stock: Int
+    val stock: Int,
+
+    val imageUrl: String?
 )
 
 data class StockResponse (

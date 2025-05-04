@@ -12,6 +12,8 @@
     <color name="primary_light">#C5CAE9</color>
     <color name="accent">#FF4081</color>
 
+    <color name="login_primary">#1A237E</color>
+
     <color name="green_success">#4CAF50</color>
     <color name="red_error">#F44336</color>
 

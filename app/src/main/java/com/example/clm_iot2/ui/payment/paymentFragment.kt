@@ -90,13 +90,15 @@ class PaymentFragment : Fragment() {
             "error" -> {
                 Toast.makeText(requireContext(), "Échec du paiement", Toast.LENGTH_LONG).show()
 
+                //findNavController().navigate(R.id.action_paymentFragment_to_paymentFailedFragment)
+
                 orderId?.let { id ->
-                    OrderRepository().deleteOrder(id.toLong()) { success, message ->
+                    OrderRepository().updateOrderStatus(id.toLong(), "cancelled") { success, message ->
                         if (success) {
-                            Log.d("PaymentFragment", "Commande supprimée avec succès")
+                            Log.d("PaymentFragment", "Commande annulée avec succès")
                             findNavController().navigate(R.id.action_paymentFragment_to_paymentFailedFragment)
                         } else {
-                            Log.e("PaymentFragment", "Erreur de suppression de commande: $message")
+                            Log.e("PaymentFragment", "Erreur d'annulation de la commande: $message")
                             Toast.makeText(requireContext(), "Erreur serveur. Réessayez.", Toast.LENGTH_SHORT).show()
                         }
                     }

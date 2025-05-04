@@ -76,7 +76,7 @@
     <fragment
             android:id="@+id/nav_development"
             android:name="com.example.clm_iot2.ui.development.DevelopmentFragment"
-            android:label="@string/menu_tracking"
+            android:label="@string/menu_developpement"
             tools:layout="@layout/fragment_in_development"/>
 
     <fragment
@@ -106,14 +106,30 @@
     <fragment
             android:id="@+id/paymentSuccessFragment"
             android:name="com.example.clm_iot2.ui.payment.PaymentSuccessFragment"
-            android:label="@string/menu_order_confirmation" />
+            android:label="@string/menu_order_confirmation">
+        <action
+                android:id="@+id/action_paymentSuccessFragment_to_productFragment"
+                app:destination="@id/nav_products" />
+
+        <action
+                android:id="@+id/action_paymentSuccessFragment_to_ordersFragment"
+                app:destination="@id/nav_orders" />
+
+    </fragment>
 
     <fragment
             android:id="@+id/paymentFailedFragment"
             android:name="com.example.clm_iot2.ui.payment.PaymentFailedFragment"
-            android:label="@string/menu_order_confirmation" />
+            android:label="@string/menu_order_confirmation" >
+        <action
+                android:id="@+id/action_paymentFailureFragment_to_productFragment"
+                app:destination="@id/nav_products" />
 
+        <action
+                android:id="@+id/action_paymentFailureFragment_to_developmentFragment"
+                app:destination="@id/nav_development"/>
 
+    </fragment>
 
 
 </navigation>

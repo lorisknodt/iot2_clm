@@ -119,7 +119,7 @@ class SingleOrderFragment : Fragment() {
                         price = product.price,
                         quantity = productQuantities[product.id] ?: 0,  // Ajout de la quantité associée
                         category = product.category,
-                        imageResId = R.drawable.ic_television // Utilise une ressource par défaut ou une dynamique
+                        imageUrl = product.imageUrl
                     )
                 }
 

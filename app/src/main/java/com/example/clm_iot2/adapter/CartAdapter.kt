@@ -5,8 +5,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.Product  // Remplace par le bon import de ton modèle
+import com.example.clm_iot2.security.TokenManager
 
 class CartAdapter(
     private val produits: MutableList<Product>,  // Liste des produits dans le panier
@@ -25,7 +29,24 @@ class CartAdapter(
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val product = produits[position]
 
-        holder.iconResId.setImageResource(R.drawable.ic_television) //de base product.iconeResId faudra changer si on gère les icones
+        // Construire l'URL complète de l'image
+        val baseUrl = "https://apiserver-bsdfh4gmduh8bsep.francecentral-01.azurewebsites.net"
+        val fullImageUrl = baseUrl + product.imageUrl
+
+        val glideUrl = GlideUrl(
+            fullImageUrl,
+            LazyHeaders.Builder()
+                .addHeader("Authorization", "Bearer ${TokenManager.getToken()}")
+                .build()
+        )
+        // Utiliser Glide pour charger l'image
+        Glide.with(holder.itemView.context)
+            .load(glideUrl)
+            //.placeholder(R.drawable.placeholder_image) // facultatif : image de chargement
+            //.error(R.drawable.error_image)             // facultatif : image d'erreur
+            .into(holder.iconResId)
+
+        //holder.iconResId.setImageResource(R.drawable.ic_television) //de base product.iconeResId faudra changer si on gère les icones
         holder.productName.text = product.name
         holder.productPrice.text = "${product.price} €"
         holder.productQuantity.text = product.quantity.toString()
@@ -86,7 +107,7 @@ class CartAdapter(
 
     // ViewHolder pour les éléments du panier
     inner class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val iconResId: ImageView = itemView.findViewById(R.id.iconeProduitCart)
+        val iconResId: ImageView = itemView.findViewById(R.id.iconeProductCart)
         val productName: TextView = itemView.findViewById(R.id.nomProduitCart)
         val productPrice: TextView = itemView.findViewById(R.id.prixProduitCart)
         val productQuantity: TextView = itemView.findViewById(R.id.tvQuantity)

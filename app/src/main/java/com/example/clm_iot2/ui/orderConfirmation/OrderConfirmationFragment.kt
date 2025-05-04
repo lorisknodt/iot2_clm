@@ -133,6 +133,17 @@ class OrderConfirmationFragment : Fragment() {
             Log.d("OrderConfirmation", "Instructions en cas d'absence: $absenceInstructions")
 
             // Création de l'objet OrderRequest avec les données dynamiques du panier
+
+            val customOption: String
+            if(orderConfViewModel.selectedDeliveryOption.value.toString() == OrderConfirmationViewModel.OPTION_OTHER){
+                val customDeliveryOption = orderConfViewModel.customDeliveryOption.value.toString()
+                customOption = customDeliveryOption
+
+            }else{
+                customOption = orderConfViewModel.selectedDeliveryOption.value.toString()
+            }
+
+
             val orderRequest = OrderRequest(
                 orderItemsCreateDTOList = orderItems,
                 adresseId = null,  // Supposition parce que l'instance existe pas encore je crois
@@ -142,10 +153,8 @@ class OrderConfirmationFragment : Fragment() {
                     number = apartment,
                     zipCode = postalCode,
                     country = country,
-                    // Ajoutez ici les instructions de livraison en cas d'absence si votre API les prend en charge
-                    // deliveryInstructions = absenceInstructions
                 ),
-                deliveryInstruction = orderConfViewModel.selectedDeliveryOption.toString()
+                deliveryInstruction = customOption
             )
 
             // Affichage des produits dans les logs pour tester

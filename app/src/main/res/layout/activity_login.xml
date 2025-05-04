@@ -1,280 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <ScrollView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:background="@drawable/login_background">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_login"
-                    android:layout_width="match_parent"
+            <!-- Logo ou image de l'application -->
+            <ImageView
+                    android:id="@+id/iv_app_logo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_cart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.25"
+                    app:layout_constraintDimensionRatio="1:1"
+                    android:layout_marginTop="@dimen/spacing_medium"/>
+
+            <!-- Titre principal avec style moderne -->
+            <TextView
+                    android:id="@+id/tv_app_name"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/login_background">
+                    android:text="@string/app_name_login_page"
+                    android:textSize="@dimen/text_xlarge"
+                    android:textStyle="bold"
+                    android:textColor="#1A237E"
+                    android:letterSpacing="0.05"
+                    app:layout_constraintTop_toBottomOf="@id/iv_app_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:elevation="2dp"/>
 
-                <!-- Logo ou image de l'application -->
-                <ImageView
-                        android:id="@+id/iv_app_logo"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:src="@drawable/ic_cart"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintWidth_percent="0.25"
-                        app:layout_constraintDimensionRatio="1:1"
-                        android:layout_marginTop="@dimen/spacing_medium"/>
+            <!-- Sous-titre explicatif avec espacement des lettres -->
+            <TextView
+                    android:id="@+id/tv_subtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/connect_to_buy_items"
+                    android:textSize="@dimen/text_medium"
+                    android:textAlignment="center"
+                    android:textColor="#78909C"
+                    android:letterSpacing="0.02"
+                    android:lineSpacingExtra="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_app_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/spacing_xsmall"
+                    android:layout_marginHorizontal="@dimen/spacing_large"/>
 
-                <!-- Titre principal avec style moderne -->
-                <TextView
-                        android:id="@+id/tv_app_name"
-                        android:layout_width="wrap_content"
+            <!-- Card pour les champs de login avec plus d'élévation et coins plus arrondis -->
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/card_login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name_login_page"
-                        android:textSize="@dimen/text_xlarge"
-                        android:textStyle="bold"
-                        android:textColor="#1A237E"
-                        android:letterSpacing="0.05"
-                        app:layout_constraintTop_toBottomOf="@id/iv_app_logo"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:elevation="2dp"/>
+                        android:padding="@dimen/spacing_medium">
 
-                <!-- Sous-titre explicatif avec espacement des lettres -->
-                <TextView
-                        android:id="@+id/tv_subtitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/connect_to_buy_items"
-                        android:textSize="@dimen/text_medium"
-                        android:textAlignment="center"
-                        android:textColor="#78909C"
-                        android:letterSpacing="0.02"
-                        android:lineSpacingExtra="4dp"
-                        app:layout_constraintTop_toBottomOf="@id/tv_app_name"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="@dimen/spacing_xsmall"
-                        android:layout_marginHorizontal="@dimen/spacing_large"/>
+                    <!-- Champ identifiant amélioré -->
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_username"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/email"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:startIconTint="@color/login_primary"
+                            app:boxStrokeColor="@color/login_primary"
+                            app:hintTextColor="@color/login_primary"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
 
-                <!-- Card pour les champs de login avec plus d'élévation et coins plus arrondis -->
-                <androidx.cardview.widget.CardView
-                        android:id="@+id/card_login"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="@dimen/spacing_medium"
-                        android:layout_marginHorizontal="@dimen/spacing_medium"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="8dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_username"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textEmailAddress"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <!-- Champ mot de passe amélioré -->
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_password"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/password_text"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            app:startIconDrawable="@drawable/ic_login_secure"
+                            app:startIconTint="@color/login_primary"
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@color/login_primary"
+                            app:boxStrokeColor="@color/login_primary"
+                            app:hintTextColor="@color/login_primary"
+                            app:layout_constraintTop_toBottomOf="@id/til_username"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/spacing_small">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPassword"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Lien "Mot de passe oublié" -->
+                    <TextView
+                            android:id="@+id/tv_forgot_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/password_forgot_text"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text_small"
+                            android:textStyle="bold"
+                            app:layout_constraintTop_toBottomOf="@id/til_password"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/spacing_xsmall"/>
+
+                    <!-- Bouton de connexion amélioré -->
+                    <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_login"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/button_height"
+                            android:text="@string/connect_text"
+                            android:backgroundTint="#1565C0"
+                            app:cornerRadius="12dp"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/text_medium"
+                            android:letterSpacing="0.05"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            app:elevation="4dp"
+                            app:layout_constraintTop_toBottomOf="@id/tv_forgot_password"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/spacing_medium"/>
+
+                    <!-- Bouton S'inscrire amélioré -->
+                    <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_register"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/button_height"
+                            android:text="@string/register_text"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/text_medium"
+                            android:letterSpacing="0.05"
+                            android:textStyle="bold"
+                            android:backgroundTint="#42A5F5"
+                            android:textColor="@android:color/white"
+                            app:cornerRadius="12dp"
+                            app:elevation="4dp"
+                            app:layout_constraintTop_toBottomOf="@id/btn_login"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginTop="@dimen/spacing_small"/>
+
+                    <!-- Séparateur stylisé -->
+                    <LinearLayout
+                            android:id="@+id/separator_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/spacing_medium">
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            app:layout_constraintTop_toBottomOf="@id/btn_register"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/spacing_medium">
 
-                        <!-- Champ identifiant amélioré -->
-                        <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/til_username"
+                        <View
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/email"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                app:startIconTint="@color/colorPrimary"
-                                app:boxStrokeColor="@color/colorPrimary"
-                                app:hintTextColor="@color/colorPrimary"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#E0E0E0"/>
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/et_username"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:inputType="textEmailAddress"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <!-- Champ mot de passe amélioré -->
-                        <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/til_password"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/password_text"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                app:startIconDrawable="@drawable/ic_login_secure"
-                                app:startIconTint="@color/colorPrimary"
-                                app:passwordToggleEnabled="true"
-                                app:passwordToggleTint="@color/colorPrimary"
-                                app:boxStrokeColor="@color/colorPrimary"
-                                app:hintTextColor="@color/colorPrimary"
-                                app:layout_constraintTop_toBottomOf="@id/til_username"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginTop="@dimen/spacing_small">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/et_password"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:inputType="textPassword"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <!-- Lien "Mot de passe oublié" -->
                         <TextView
-                                android:id="@+id/tv_forgot_password"
+                                android:id="@+id/tv_or_masi"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/password_forgot_text"
-                                android:textColor="@color/colorAccent"
+                                android:text="@string/or_text"
+                                android:textColor="#78909C"
                                 android:textSize="@dimen/text_small"
                                 android:textStyle="bold"
-                                app:layout_constraintTop_toBottomOf="@id/til_password"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginTop="@dimen/spacing_xsmall"/>
+                                android:paddingHorizontal="@dimen/spacing_small"/>
 
-                        <!-- Bouton de connexion amélioré -->
-                        <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_login"
+                        <View
                                 android:layout_width="0dp"
-                                android:layout_height="@dimen/button_height"
-                                android:text="@string/connect_text"
-                                android:backgroundTint="#1565C0"
-                                app:cornerRadius="12dp"
-                                android:textAllCaps="false"
-                                android:textSize="@dimen/text_medium"
-                                android:letterSpacing="0.05"
-                                android:textStyle="bold"
-                                android:textColor="@android:color/white"
-                                app:elevation="4dp"
-                                app:layout_constraintTop_toBottomOf="@id/tv_forgot_password"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginTop="@dimen/spacing_medium"/>
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#E0E0E0"/>
+                    </LinearLayout>
 
-                        <!-- Bouton S'inscrire amélioré -->
-                        <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_register"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/button_height"
-                                android:text="@string/register_text"
-                                android:textAllCaps="false"
-                                android:textSize="@dimen/text_medium"
-                                android:letterSpacing="0.05"
-                                android:textStyle="bold"
-                                android:backgroundTint="#42A5F5"
-                                android:textColor="@android:color/white"
-                                app:cornerRadius="12dp"
-                                app:elevation="4dp"
-                                app:layout_constraintTop_toBottomOf="@id/btn_login"
-                                app:layout_constraintStart_toStartOf="parent"
-                                android:layout_marginTop="@dimen/spacing_small"/>
+                    <!-- Bouton MASI-ID amélioré -->
+                    <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_login_masi"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/button_height"
+                            android:text="@string/connect_with_masi_id"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/text_medium"
+                            android:textStyle="bold"
+                            app:icon="@drawable/ic_login_secure"
+                            app:iconSize="24dp"
+                            app:iconGravity="textStart"
+                            app:iconPadding="12dp"
+                            app:cornerRadius="12dp"
+                            android:backgroundTint="#3949AB"
+                            app:elevation="4dp"
+                            app:layout_constraintTop_toBottomOf="@id/separator_layout"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/spacing_medium"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-                        <!-- Séparateur stylisé -->
-                        <LinearLayout
-                                android:id="@+id/separator_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center"
-                                app:layout_constraintTop_toBottomOf="@id/btn_register"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginTop="@dimen/spacing_medium">
-
-                            <View
-                                    android:layout_width="0dp"
-                                    android:layout_height="1dp"
-                                    android:layout_weight="1"
-                                    android:background="#E0E0E0"/>
-
-                            <TextView
-                                    android:id="@+id/tv_or_masi"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/or_text"
-                                    android:textColor="#78909C"
-                                    android:textSize="@dimen/text_small"
-                                    android:textStyle="bold"
-                                    android:paddingHorizontal="@dimen/spacing_small"/>
-
-                            <View
-                                    android:layout_width="0dp"
-                                    android:layout_height="1dp"
-                                    android:layout_weight="1"
-                                    android:background="#E0E0E0"/>
-                        </LinearLayout>
-
-                        <!-- Bouton MASI-ID amélioré -->
-                        <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_login_masi"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/button_height"
-                                android:text="@string/connect_with_masi_id"
-                                android:textAllCaps="false"
-                                android:textSize="@dimen/text_medium"
-                                android:textStyle="bold"
-                                app:icon="@drawable/ic_login_secure"
-                                app:iconSize="24dp"
-                                app:iconGravity="textStart"
-                                app:iconPadding="12dp"
-                                app:cornerRadius="12dp"
-                                android:backgroundTint="#3949AB"
-                                app:elevation="4dp"
-                                app:layout_constraintTop_toBottomOf="@id/separator_layout"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginTop="@dimen/spacing_medium"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- Texte d'assistance avec effet de clic -->
-                <TextView
-                        android:id="@+id/tv_help"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/need_help_contact_us"
-                        android:textColor="#3F51B5"
-                        android:textSize="@dimen/text_medium"
-                        android:textStyle="bold"
-                        android:padding="@dimen/spacing_small"
-                        android:background="?attr/selectableItemBackground"
-                        app:layout_constraintTop_toBottomOf="@id/card_login"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:layout_marginBottom="@dimen/spacing_small"/>
-                <FrameLayout
-                        android:id="@+id/register_fragment_container"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:visibility="gone" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Texte d'assistance avec effet de clic -->
+            <TextView
+                    android:id="@+id/tv_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/need_help_contact_us"
+                    android:textColor="#3F51B5"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold"
+                    android:padding="@dimen/spacing_small"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintTop_toBottomOf="@id/card_login"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"/>
+            <FrameLayout
+                    android:id="@+id/register_fragment_container"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"/>
 
             <!-- ProgressBar stylisée avec un CardView -->
             <androidx.cardview.widget.CardView
                     android:id="@+id/loginLoadingCard"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:elevation="8dp"
+                    android:elevation="10dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     android:layout_gravity="center"
@@ -306,6 +294,5 @@
                             android:textSize="12sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </ScrollView>
-</FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

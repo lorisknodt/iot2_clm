@@ -7,8 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.example.clm_iot2.R
 import com.example.clm_iot2.model.Product
+import com.example.clm_iot2.security.TokenManager
 
 class ProductAdapter(
     private var products: List<Product>,
@@ -31,7 +35,24 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProduitViewHolder, position: Int) {
         val produit = products[position]
-        holder.iconeProduit.setImageResource(R.drawable.ic_television)
+
+        // Construire l'URL complète de l'image
+        val baseUrl = "https://apiserver-bsdfh4gmduh8bsep.francecentral-01.azurewebsites.net"
+        val fullImageUrl = baseUrl + produit.imageUrl
+
+        val glideUrl = GlideUrl(
+            fullImageUrl,
+            LazyHeaders.Builder()
+                .addHeader("Authorization", "Bearer ${TokenManager.getToken()}")
+                .build()
+        )
+        // Utiliser Glide pour charger l'image
+        Glide.with(holder.itemView.context)
+            .load(glideUrl)
+            //.placeholder(R.drawable.placeholder_image) // facultatif : image de chargement
+            //.error(R.drawable.error_image)             // facultatif : image d'erreur
+            .into(holder.iconeProduit)
+
         holder.nomProduit.text = produit.name
         holder.descriptionProduct.text = produit.description
         holder.prixProduit.text = "${produit.price} €"
@@ -42,7 +63,7 @@ class ProductAdapter(
                 putString("name", produit.name)
                 putString("description", produit.description)
                 putDouble("price", produit.price)
-                putInt("imageResId", R.drawable.ic_television) // Si c'est une ressource locale
+                putString("imageUrl", produit.imageUrl) // important si tu veux afficher aussi l'image dans la fiche produit
                 putInt("stock", produit.stock)
             }
 
@@ -52,12 +73,12 @@ class ProductAdapter(
             )
         }
 
-
         holder.btnAdd.setOnClickListener {
-            val produitAvecQuantite = produit.copy(quantity = 1) // S'assure que la quantité est définie correctement
+            val produitAvecQuantite = produit.copy(quantity = 1)
             onProductAdded(produitAvecQuantite)
         }
     }
+
 
     fun updateData(newProduits: List<Product>) {
         products = newProduits

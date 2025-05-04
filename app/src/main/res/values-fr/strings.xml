@@ -17,6 +17,7 @@
     <string name="menu_product_detail">Détails du produit</string>
     <string name="menu_order_detail">Détails de la commande</string>
     <string name="menu_order_confirmation">Confirmation de commande</string>
+    <string name="menu_developpement">En cours de développement</string>
 
     <string name="description_image_produit">Description</string>
     <string name="loading">Chargement</string>
@@ -74,7 +75,7 @@
     <string name="saved_addresses_text">Adresses enregistrées</string>
     <string name="choose_address">Choisir une adresse</string>
     <string name="address_and_number">Adresse (Rue et numéro)</string>
-    <string name="apartment_optional">Appartement, étage, etc. (optionnel)</string>
+    <string name="street_number">Numéro</string>
     <string name="city_text">Ville</string>
     <string name="country_text">Pays</string>
     <string name="postal_code_text">Code Postal</string>
@@ -119,7 +120,7 @@
     <string name="order_number_placeholder">N° de commande: #12345</string>
     <string name="order_number_format">N° de commande: #%s</string>
     <string name="continue_shopping">Continuer vos achats</string>
-    <string name="view_order">Voir ma commande</string>
+    <string name="view_order">Voir mes commandes</string>
 
     <!-- Strings pour le layout d'échec de paiement -->
     <string name="failed_icon_description">Icône d\'échec</string>
@@ -128,7 +129,7 @@
     <string name="error_code_placeholder">Code erreur: ERR-1234</string>
     <string name="error_code_format">Code erreur: %s</string>
     <string name="try_again">Réessayer</string>
-    <string name="contact_support">Contacter le support</string>
+    <string name="main_menu">Menu principal</string>
 
 
     <string name="cancel_order">Annuler la commande</string>

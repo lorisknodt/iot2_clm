@@ -46,12 +46,18 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        Log.d("RegisterFragment", "onCreateView called")
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+        Log.d("RegisterFragment", "onViewCreated called")
 
         // Initialiser les vues
         etFirstName = view.findViewById(R.id.et_first_name)
@@ -107,7 +113,7 @@ class RegisterFragment : Fragment() {
                         password = password,
                         birthDate = formattedBirthDate,
                         email = email,
-                        role = "CLIENT"
+                        role = "ADMIN"
                     )
                     // Lancer une coroutine pour l’appel API
                     viewLifecycleOwner.lifecycleScope.launch {

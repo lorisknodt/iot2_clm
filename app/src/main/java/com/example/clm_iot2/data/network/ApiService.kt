@@ -48,7 +48,7 @@ interface ApiService {
 
     @DELETE("v1/order/{orderId}")
     fun deleteOrder(
-        @Path("orderId") orderId: Long
+        @Path("orderId") orderId: Int
     ): Call<Void>
 
 

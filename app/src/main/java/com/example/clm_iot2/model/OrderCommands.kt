@@ -37,7 +37,7 @@ data class OrderProduct(
     val description: String,
     val category: Category,
     val quantity: Int,
-    val imageResId: Int
+    val imageUrl: String
 )
 
 data class NewAddress(

@@ -5,9 +5,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.example.clm_iot2.R
 
 import com.example.clm_iot2.model.OrderProduct
+import com.example.clm_iot2.security.TokenManager
 
 class OrderProductsAdapter(private val products: List<OrderProduct>) :
     RecyclerView.Adapter<OrderProductsAdapter.ProductViewHolder>() {
@@ -37,7 +41,22 @@ class OrderProductsAdapter(private val products: List<OrderProduct>) :
             productVariant.text = product.description
             productQuantity.text = itemView.context.getString(R.string.singleorder_quantiy, product.quantity.toString())
             productPrice.text = String.format("%.2f €", product.price * product.quantity)
-            productImage.setImageResource(product.imageResId)
+
+            val baseUrl = "https://apiserver-bsdfh4gmduh8bsep.francecentral-01.azurewebsites.net"
+            val fullImageUrl = baseUrl + product.imageUrl
+
+            val glideUrl = GlideUrl(
+                fullImageUrl,
+                LazyHeaders.Builder()
+                    .addHeader("Authorization", "Bearer ${TokenManager.getToken()}")
+                    .build()
+            )
+            // Utiliser Glide pour charger l'image
+            Glide.with(itemView.context)
+                .load(glideUrl)
+                //.placeholder(R.drawable.placeholder_image) // facultatif : image de chargement
+                //.error(R.drawable.error_image)             // facultatif : image d'erreur
+                .into(productImage)
         }
     }
 }
