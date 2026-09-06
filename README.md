@@ -5,7 +5,13 @@ Ce projet est une application mobile Android développée en Kotlin utilisant l'
 Les commandes d'un utilisateur peuvent être affichés dans une page respective et pour chaque commande, on peut y visualiser le détail.
 
 
-## 📋 Fonctionnalités mises en place
+## 📋 Fonctionnalités mises en place & Demo
+
+| Ajouter un article | Annuler commande | Passer une commande|
+| :---: | :---: |  :---: |
+| <img width="280"  alt="ajouT" src="https://github.com/user-attachments/assets/4fc0d5e0-10c8-4e5e-a010-f065f39ae366" /> | <img width="280" alt="annul" src="https://github.com/user-attachments/assets/89ace584-4ffe-4746-96fc-e36239f95c18" /> | <img width="280" alt="commander" src="https://github.com/user-attachments/assets/466dbcc7-2fbd-4074-a11c-e817491b71ee" /> |
+
+
 
 ### Produits
 Affichage d'une liste de produits sous forme de cartes avec :
